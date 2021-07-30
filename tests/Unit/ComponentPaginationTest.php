@@ -45,7 +45,7 @@ class ComponentPaginationTest extends TestCase
 class ComponentWithPaginationStub extends Component
 {
     use WithPagination;
-    
+
     public function render()
     {
         return view('show-name', ['name' => 'example']);

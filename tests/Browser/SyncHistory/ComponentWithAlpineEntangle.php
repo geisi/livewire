@@ -11,7 +11,10 @@ class ComponentWithAlpineEntangle extends Component
 
     protected $queryString = ['page'];
 
-    public function nextPage() { $this->page++; }
+    public function nextPage()
+    {
+        $this->page++;
+    }
 
     public function render()
     {

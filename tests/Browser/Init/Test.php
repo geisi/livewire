@@ -15,8 +15,7 @@ class Test extends TestCase
                  * wire:init runs on page load.
                  */
                 ->waitForText('foo')
-                ->assertSee('foo')
-            ;
+                ->assertSee('foo');
         });
     }
 }

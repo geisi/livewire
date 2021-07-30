@@ -17,8 +17,7 @@ class Test extends TestCase
             Livewire::visit($browser, Component::class)
                     ->assertSeeIn('@posts-comments-relation-loaded', 'true')
                     ->waitForLivewire()->click('@refresh-server')
-                    ->assertSeeIn('@posts-comments-relation-loaded', 'true')
-                    ;
+                    ->assertSeeIn('@posts-comments-relation-loaded', 'true');
         });
     }
 
@@ -29,8 +28,7 @@ class Test extends TestCase
             Livewire::visit($browser, Component::class)
                     ->assertSeeIn('@comments-has-no-relations', 'true')
                     ->waitForLivewire()->click('@refresh-server')
-                    ->assertSeeIn('@comments-has-no-relations', 'true')
-                    ;
+                    ->assertSeeIn('@comments-has-no-relations', 'true');
         });
     }
 }

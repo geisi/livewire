@@ -4,7 +4,6 @@ namespace Tests\Browser\MagicActions;
 
 use Livewire\Livewire;
 use Tests\Browser\TestCase;
-use Tests\Browser\MagicActions\Component;
 
 class Test extends TestCase
 {
@@ -24,8 +23,7 @@ class Test extends TestCase
                 ->waitForLivewire()->click('@toggleNested')
                 ->assertSeeIn('@outputNested', 'true')
                 ->waitForLivewire()->click('@toggleNested')
-                ->assertSeeIn('@outputNested', 'false')
-            ;
+                ->assertSeeIn('@outputNested', 'false');
         });
     }
 
@@ -35,8 +33,7 @@ class Test extends TestCase
             Livewire::visit($browser, Component::class)
                 ->assertDontSeeIn('@outputEvent', 'baz')
                 ->waitForLivewire()->click('@fillBar')
-                ->assertSeeIn('@outputEvent', 'baz')
-            ;
+                ->assertSeeIn('@outputEvent', 'baz');
         });
     }
 }

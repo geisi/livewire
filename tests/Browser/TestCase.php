@@ -4,29 +4,29 @@ namespace Tests\Browser;
 
 use Closure;
 use Exception;
-use Psy\Shell;
-use Throwable;
-use Sushi\Sushi;
-use Livewire\Livewire;
-use Livewire\Component;
-use Laravel\Dusk\Browser;
-use function Livewire\str;
+use Facebook\WebDriver\Chrome\ChromeOptions;
+use Facebook\WebDriver\Remote\DesiredCapabilities;
+use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as AuthUser;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
+use Laravel\Dusk\Browser;
+use Livewire\Component;
+use Livewire\Livewire;
 use Livewire\LivewireServiceProvider;
 use Livewire\Macros\DuskBrowserMacros;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Artisan;
-use Facebook\WebDriver\Chrome\ChromeOptions;
-use Facebook\WebDriver\Remote\RemoteWebDriver;
-use Illuminate\Foundation\Auth\User as AuthUser;
-use Facebook\WebDriver\Remote\DesiredCapabilities;
-use Illuminate\Support\Facades\View;
+use function Livewire\str;
 use Orchestra\Testbench\Dusk\Options as DuskOptions;
 use Orchestra\Testbench\Dusk\TestCase as BaseTestCase;
+use Psy\Shell;
+use Sushi\Sushi;
 use Tests\Browser\Security\Component as SecurityComponent;
+use Throwable;
 
 class TestCase extends BaseTestCase
 {
@@ -97,11 +97,11 @@ class TestCase extends BaseTestCase
             // The following two routes belong together. The first one serves a view which in return
             // loads and renders a component dynamically. There may not be a POST route for the first one.
             Route::get('/livewire-dusk/tests/browser/load-dynamic-component', function () {
-                return View::file(__DIR__ . '/DynamicComponentLoading/view-load-dynamic-component.blade.php');
+                return View::file(__DIR__.'/DynamicComponentLoading/view-load-dynamic-component.blade.php');
             })->middleware('web')->name('load-dynamic-component');
 
             Route::post('/livewire-dusk/tests/browser/dynamic-component', function () {
-                return View::file(__DIR__ . '/DynamicComponentLoading/view-dynamic-component.blade.php');
+                return View::file(__DIR__.'/DynamicComponentLoading/view-dynamic-component.blade.php');
             })->middleware('web')->name('dynamic-component');
 
             Route::get('/livewire-dusk/{component}', function ($component) {
@@ -159,8 +159,13 @@ class TestCase extends BaseTestCase
     }
 
     // We don't want to deal with screenshots or console logs.
-    protected function storeConsoleLogsFor($browsers) {}
-    protected function captureFailuresFor($browsers) {}
+    protected function storeConsoleLogsFor($browsers)
+    {
+    }
+
+    protected function captureFailuresFor($browsers)
+    {
+    }
 
     public function makeACleanSlate()
     {
@@ -170,8 +175,6 @@ class TestCase extends BaseTestCase
         File::cleanDirectory(__DIR__.'/downloads');
         File::deleteDirectory($this->livewireClassesPath());
         File::delete(app()->bootstrapPath('cache/livewire-components.php'));
-
-
     }
 
     protected function getPackageProviders($app)
@@ -247,11 +250,15 @@ class TestCase extends BaseTestCase
             try {
                 $callback(...$browsers);
             } catch (Exception $e) {
-                if (DuskOptions::hasUI()) $this->breakIntoATinkerShell($browsers, $e);
+                if (DuskOptions::hasUI()) {
+                    $this->breakIntoATinkerShell($browsers, $e);
+                }
 
                 throw $e;
             } catch (Throwable $e) {
-                if (DuskOptions::hasUI()) $this->breakIntoATinkerShell($browsers, $e);
+                if (DuskOptions::hasUI()) {
+                    $this->breakIntoATinkerShell($browsers, $e);
+                }
 
                 throw $e;
             }

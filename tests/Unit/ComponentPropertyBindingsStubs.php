@@ -17,6 +17,7 @@ class PropBoundModel extends Model
     public function resolveRouteBinding($value, $field = null)
     {
         $this->value = "via-route:$value";
+
         return $this;
     }
 

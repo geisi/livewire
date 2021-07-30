@@ -2,11 +2,9 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\Exceptions\RootTagMissingFromViewException;
 use Livewire\Livewire;
-use Livewire\LivewireManager;
 use function Livewire\str;
 
 class ComponentRootHasIdAndComponentDataTest extends TestCase

@@ -69,6 +69,7 @@ class FileUploadConfiguration
     public static function mimeType($filename)
     {
         $mimeType = static::storage()->getMimeType(static::path($filename));
+
         return $mimeType === 'image/svg' ? 'image/svg+xml' : $mimeType;
     }
 
@@ -81,9 +82,13 @@ class FileUploadConfiguration
     {
         $rules = config('livewire.temporary_file_upload.rules');
 
-        if (is_null($rules)) return ['required', 'file', 'max:12288'];
+        if (is_null($rules)) {
+            return ['required', 'file', 'max:12288'];
+        }
 
-        if (is_array($rules)) return $rules;
+        if (is_array($rules)) {
+            return $rules;
+        }
 
         return explode('|', $rules);
     }

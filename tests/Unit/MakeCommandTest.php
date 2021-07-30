@@ -3,8 +3,8 @@
 namespace Tests\Unit;
 
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 
 class MakeCommandTest extends TestCase
 {

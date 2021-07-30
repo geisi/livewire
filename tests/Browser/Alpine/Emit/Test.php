@@ -29,8 +29,7 @@ class Test extends TestCase
                 ->assertDontSee('emit to worked')
                 ->waitForLivewire()
                 ->click('@emitTo')
-                ->assertSee('emit to worked')
-            ;
+                ->assertSee('emit to worked');
         });
     }
 }

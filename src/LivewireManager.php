@@ -2,10 +2,9 @@
 
 namespace Livewire;
 
-use Exception;
-use Livewire\Testing\TestableLivewire;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Livewire\Exceptions\ComponentNotFoundException;
+use Livewire\Testing\TestableLivewire;
 
 class LivewireManager
 {
@@ -88,7 +87,9 @@ class LivewireManager
     public function mount($name, $params = [])
     {
         // This is if a user doesn't pass params, BUT passes key() as the second argument.
-        if (is_string($params)) $params = [];
+        if (is_string($params)) {
+            $params = [];
+        }
 
         $id = str()->random(20);
 
@@ -215,7 +216,7 @@ HTML;
 
         $appUrl = config('livewire.asset_url') ?: rtrim($options['asset_url'] ?? '', '/');
 
-        $jsLivewireToken = app()->has('session.store') ? "'" . csrf_token() . "'" : 'null';
+        $jsLivewireToken = app()->has('session.store') ? "'".csrf_token()."'" : 'null';
 
         $manifest = json_decode(file_get_contents(__DIR__.'/../dist/manifest.json'), true);
         $versionedFileName = $manifest['/livewire.js'];
@@ -242,19 +243,19 @@ HTML;
             }
         }
 
-	    $devTools = null;
-	    $windowLivewireCheck = null;
-	    $windowAlpineCheck = null;
+        $devTools = null;
+        $windowLivewireCheck = null;
+        $windowAlpineCheck = null;
         if (config('app.debug')) {
-	        $devTools = 'window.livewire.devTools(true);';
+            $devTools = 'window.livewire.devTools(true);';
 
-	        $windowLivewireCheck = <<<'HTML'
+            $windowLivewireCheck = <<<'HTML'
 if (window.livewire) {
 	    console.warn('Livewire: It looks like Livewire\'s @livewireScripts JavaScript assets have already been loaded. Make sure you aren\'t loading them twice.')
 	}
 HTML;
 
-	        $windowAlpineCheck = <<<'HTML'
+            $windowAlpineCheck = <<<'HTML'
 /* Make sure Livewire loads first. */
 	if (window.Alpine) {
 	    /* Defer showing the warning so it doesn't get buried under downstream errors. */
@@ -267,7 +268,6 @@ HTML;
 
 	/* Make Alpine wait until Livewire is finished rendering to do its thing. */
 HTML;
-
         }
 
         // Adding semicolons for this JavaScript is important,
@@ -326,14 +326,18 @@ HTML;
     {
         $route = request()->route();
 
-        if (! $route) return false;
+        if (! $route) {
+            return false;
+        }
 
         return $route->named('livewire.message');
     }
 
     public function isProbablyLivewireRequest()
     {
-        if (static::$isLivewireRequestTestingOverride) return true;
+        if (static::$isLivewireRequestTestingOverride) {
+            return true;
+        }
 
         return request()->hasHeader('X-Livewire');
     }

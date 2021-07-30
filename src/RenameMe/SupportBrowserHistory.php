@@ -2,26 +2,31 @@
 
 namespace Livewire\RenameMe;
 
-use Livewire\Livewire;
-use Livewire\Response;
-use Livewire\Component;
-use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Routing\UrlGenerator;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Illuminate\Support\Arr;
+use Livewire\Component;
+use Livewire\Livewire;
+use Livewire\Response;
 use function Livewire\str;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SupportBrowserHistory
 {
-    static function init() { return new static; }
+    public static function init()
+    {
+        return new static;
+    }
 
     protected $mergedQueryParamsFromDehydratedComponents;
 
-    function __construct()
+    public function __construct()
     {
         Livewire::listen('component.hydrate.initial', function ($component) {
-            if (! $properties = $this->getQueryParamsFromComponentProperties($component)->keys()) return;
+            if (! $properties = $this->getQueryParamsFromComponentProperties($component)->keys()) {
+                return;
+            }
 
             $queryParams = request()->query();
 
@@ -41,7 +46,9 @@ class SupportBrowserHistory
         });
 
         Livewire::listen('component.dehydrate.initial', function (Component $component, Response $response) {
-            if (! $this->shouldSendPath($component)) return;
+            if (! $this->shouldSendPath($component)) {
+                return;
+            }
 
             $queryParams = $this->mergeComponentPropertiesWithExistingQueryParamsFromOtherComponentsAndTheRequest($component);
 
@@ -49,11 +56,15 @@ class SupportBrowserHistory
         });
 
         Livewire::listen('component.dehydrate.subsequent', function (Component $component, Response $response) {
-            if (! $referer = request()->header('Referer')) return;
+            if (! $referer = request()->header('Referer')) {
+                return;
+            }
 
             $route = $this->getRouteFromReferer($referer);
 
-            if ( ! $this->shouldSendPath($component, $route)) return;
+            if (! $this->shouldSendPath($component, $route)) {
+                return;
+            }
 
             $queryParams = $this->mergeComponentPropertiesWithExistingQueryParamsFromOtherComponentsAndTheRequest($component);
 
@@ -76,7 +87,7 @@ class SupportBrowserHistory
             return app('router')->getRoutes()->match(
                 Request::create($referer, Livewire::originalMethod())
             );
-        } catch (NotFoundHttpException|MethodNotAllowedHttpException $e) {
+        } catch (NotFoundHttpException | MethodNotAllowedHttpException $e) {
             // If not, use the current route.
             return app('router')->current();
         }
@@ -85,7 +96,9 @@ class SupportBrowserHistory
     protected function shouldSendPath($component, $route = null)
     {
         // If the component is setting $queryString params.
-        if (! $this->getQueryParamsFromComponentProperties($component)->isEmpty()) return true;
+        if (! $this->getQueryParamsFromComponentProperties($component)->isEmpty()) {
+            return true;
+        }
 
         $route = $route ?? app('router')->current();
 
@@ -112,14 +125,16 @@ class SupportBrowserHistory
 
     public function getQueryParamsFromRefererHeader()
     {
-        if (empty($referer = request()->header('Referer'))) return [];
+        if (empty($referer = request()->header('Referer'))) {
+            return [];
+        }
 
         parse_str(parse_url($referer, PHP_URL_QUERY), $refererQueryString);
 
         return $refererQueryString;
     }
 
-    protected function buildPathFromReferer($referer, $queryParams) : string
+    protected function buildPathFromReferer($referer, $queryParams): string
     {
         return str($referer)->before('?').$this->stringifyQueryParams($queryParams);
     }
@@ -172,7 +187,7 @@ class SupportBrowserHistory
     protected function getQueryParamsFromComponentProperties($component)
     {
         return collect($component->getQueryString())
-            ->mapWithKeys(function($value, $key) use ($component) {
+            ->mapWithKeys(function ($value, $key) use ($component) {
                 $key = is_string($key) ? $key : $value;
 
                 return [$key => $component->{$key}];

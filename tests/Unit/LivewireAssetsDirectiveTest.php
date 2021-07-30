@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use Livewire\Livewire;
 use Illuminate\Support\Facades\View;
+use Livewire\Livewire;
 
 class LivewireAssetsDirectiveTest extends TestCase
 {

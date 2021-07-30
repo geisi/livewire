@@ -12,7 +12,7 @@ class Test extends TestCase
         $this->browse(function ($browser) {
             Livewire::visit($browser, Component::class)
                 /**
-                 * ->dispatchBrowserEvent()
+                 * ->dispatchBrowserEvent().
                  */
                 ->assertDontSeeIn('@foo.output', 'bar')
                 ->waitForLivewire()->click('@foo.button')
@@ -48,7 +48,7 @@ class Test extends TestCase
                 ->assertSeeIn('@baz.output', '6')
 
                 /**
-                 * get, set, and call with special characters
+                 * get, set, and call with special characters.
                  */
                 ->assertSeeIn('@special.output', 'abc')
                 ->assertSeeIn('@special.get', 'abc')
@@ -68,7 +68,7 @@ class Test extends TestCase
                 ->assertSeeIn('@special.output', 'žžžžžž')
 
                 /**
-                 * .call() return value
+                 * .call() return value.
                  */
                 ->assertDontSeeIn('@bob.output', '1')
                 ->waitForLivewire()->click('@bob.button.await')
@@ -77,7 +77,7 @@ class Test extends TestCase
                 ->assertSeeIn('@bob.output', '2')
 
                 /**
-                 * $wire.entangle
+                 * $wire.entangle.
                  */
                 ->assertSeeIn('@lob.output', '6')
                 ->waitForLivewire(function ($b) {
@@ -88,7 +88,7 @@ class Test extends TestCase
                 ->assertSeeIn('@lob.output', '6')
 
                 /**
-                 * $wire.entangle nested property
+                 * $wire.entangle nested property.
                  */
                 ->assertSeeIn('@law.output.alpine', '0')
                 ->assertSeeIn('@law.output.wire', '0')
@@ -122,12 +122,11 @@ class Test extends TestCase
                 ->assertSeeIn('@lob.output', '100')
 
                 /**
-                 * $dispatch('input', value) works with wire:model
+                 * $dispatch('input', value) works with wire:model.
                  */
                 ->assertSeeIn('@zorp.output', 'before')
                 ->waitForLivewire()->click('@zorp.button')
-                ->assertSeeIn('@zorp.output', 'after')
-            ;
+                ->assertSeeIn('@zorp.output', 'after');
         });
     }
 
@@ -137,8 +136,7 @@ class Test extends TestCase
             Livewire::visit($browser, SmallComponent::class)
                 ->assertSeeIn('@output', '0')
                 ->waitForLivewire()->click('@button')
-                ->assertSeeIn('@output', '1')
-            ;
+                ->assertSeeIn('@output', '1');
         });
     }
 
@@ -150,8 +148,7 @@ class Test extends TestCase
                 ->waitForLivewire()->click('@button')
                 ->assertAttribute('@span', '@click', 'hey')
                 ->waitForLivewire()->click('@button')
-                ->assertAttributeMissing('@span', '@click', 'hey')
-            ;
+                ->assertAttributeMissing('@span', '@click', 'hey');
         });
     }
 
@@ -171,8 +168,7 @@ class Test extends TestCase
                 ->click('@componentClick')
                 ->assertSeeIn('@alpineComponentClicksFired', 2)
                 ->click('@componentClick')
-                ->assertSeeIn('@alpineComponentClicksFired', 3)
-            ;
+                ->assertSeeIn('@alpineComponentClicksFired', 3);
         });
     }
 }

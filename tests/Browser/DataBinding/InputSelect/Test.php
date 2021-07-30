@@ -2,8 +2,8 @@
 
 namespace Tests\Browser\DataBinding\InputSelect;
 
-use Livewire\Livewire;
 use Laravel\Dusk\Browser;
+use Livewire\Livewire;
 use Tests\Browser\TestCase;
 
 class Test extends TestCase

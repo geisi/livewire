@@ -37,8 +37,7 @@ class Test extends TestCase
                 ->pause(500)
                 ->dismissDialog()
                 ->assertSeeIn('@redirect.blade.output', 'foo')
-                ->assertSeeIn('@redirect.alpine.output', 'foo')
-            ;
+                ->assertSeeIn('@redirect.alpine.output', 'foo');
         });
     }
 }

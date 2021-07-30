@@ -2,12 +2,12 @@
 
 namespace Tests\Unit;
 
-use Livewire\Livewire;
-use Livewire\Component;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
-use Livewire\Exceptions\CorruptComponentPayloadException;
+use Illuminate\Support\Facades\Schema;
+use Livewire\Component;
 use Livewire\Exceptions\CannotBindToModelDataWithoutValidationRuleException;
+use Livewire\Exceptions\CorruptComponentPayloadException;
+use Livewire\Livewire;
 
 class ModelsCanBeSetAsPublicPropertiesTest extends TestCase
 {
@@ -100,7 +100,7 @@ class ModelsCanBeSetAsPublicPropertiesTest extends TestCase
 
         $this->assertEquals([2, 1], $component->payload['serverMemo']['dataMeta']['modelCollections']['models']['id']);
 
-        $component ->call('refresh');
+        $component->call('refresh');
 
         $this->assertEquals([2, 1], $component->payload['serverMemo']['dataMeta']['modelCollections']['models']['id']);
     }
@@ -121,7 +121,9 @@ class ComponentWithModelPublicProperty extends Component
         $this->model = $model;
     }
 
-    public function refresh() {}
+    public function refresh()
+    {
+    }
 
     public function deleteAndRemoveModel()
     {
@@ -145,7 +147,9 @@ class ComponentWithModelsPublicProperty extends Component
         $this->models = $models;
     }
 
-    public function refresh() {}
+    public function refresh()
+    {
+    }
 
     public function render()
     {

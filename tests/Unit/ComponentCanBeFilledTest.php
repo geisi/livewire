@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Livewire\Livewire;
-use Illuminate\Database\Eloquent\Model;
 
 class ComponentCanBeFilledTest extends TestCase
 {
@@ -83,34 +83,39 @@ class ComponentCanBeFilledTest extends TestCase
         $component
             ->assertSet('user.name', null)
             ->call('callFill', [
-                'user.name' => 'Caleb'
+                'user.name' => 'Caleb',
             ])
             ->assertSet('user.name', 'Caleb');
     }
 }
 
-class User {
+class User
+{
     public $publicProperty = 'Caleb';
     public $protectedProperty = 'Caleb';
     public $privateProperty = 'Caleb';
 }
 
-class UserModel extends Model {
+class UserModel extends Model
+{
     public $appends = [
         'publicProperty',
         'protectedProperty',
-        'privateProperty'
+        'privateProperty',
     ];
 
-    public function getPublicPropertyAttribute() {
+    public function getPublicPropertyAttribute()
+    {
         return 'Caleb';
     }
 
-    public function getProtectedPropertyAttribute() {
+    public function getProtectedPropertyAttribute()
+    {
         return 'protected';
     }
 
-    public function getPrivatePropertyAttribute() {
+    public function getPrivatePropertyAttribute()
+    {
         return 'private';
     }
 }

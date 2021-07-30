@@ -15,6 +15,7 @@ class S3CleanupCommand extends Command
     {
         if (! FileUploadConfiguration::isUsingS3()) {
             $this->error("Configuration ['livewire.temporary_file_upload.disk'] is not set to a disk with an S3 driver.");
+
             return;
         }
 

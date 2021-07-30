@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use Livewire\Livewire;
 use Livewire\Component;
 use Livewire\Exceptions\DirectlyCallingLifecycleHooksNotAllowedException;
+use Livewire\Livewire;
 
 class CantCallLifecycleHooksDirectlyFromJSTest extends TestCase
 {

@@ -2,8 +2,8 @@
 
 namespace Livewire\HydrationMiddleware;
 
-use Livewire\Livewire;
 use Illuminate\Validation\ValidationException;
+use Livewire\Livewire;
 
 class PerformDataBindingUpdates implements HydrationMiddleware
 {
@@ -11,7 +11,9 @@ class PerformDataBindingUpdates implements HydrationMiddleware
     {
         try {
             foreach ($request->updates as $update) {
-                if ($update['type'] !== 'syncInput') continue;
+                if ($update['type'] !== 'syncInput') {
+                    continue;
+                }
 
                 $data = $update['payload'];
 

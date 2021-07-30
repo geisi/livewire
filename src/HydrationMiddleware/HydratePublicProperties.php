@@ -2,21 +2,20 @@
 
 namespace Livewire\HydrationMiddleware;
 
-use Livewire\Exceptions\PublicPropertyTypeNotAllowedException;
-use Illuminate\Queue\SerializesAndRestoresModelIdentifiers;
-use Illuminate\Contracts\Queue\QueueableCollection;
-use Illuminate\Contracts\Database\ModelIdentifier;
-use Illuminate\Support\Carbon as IlluminateCarbon;
-use Illuminate\Contracts\Queue\QueueableEntity;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Stringable;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use ReflectionProperty;
-use Livewire\Wireable;
 use Carbon\Carbon;
 use DateTime;
+use Illuminate\Contracts\Database\ModelIdentifier;
+use Illuminate\Contracts\Queue\QueueableCollection;
+use Illuminate\Contracts\Queue\QueueableEntity;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Queue\SerializesAndRestoresModelIdentifiers;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon as IlluminateCarbon;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Stringable;
+use Livewire\Exceptions\PublicPropertyTypeNotAllowedException;
+use Livewire\Wireable;
+use ReflectionProperty;
 use stdClass;
 
 class HydratePublicProperties implements HydrationMiddleware
@@ -43,15 +42,15 @@ class HydratePublicProperties implements HydrationMiddleware
                 ];
 
                 data_set($instance, $property, new $types[$type]($value));
-            } else if (in_array($property, $collections)) {
+            } elseif (in_array($property, $collections)) {
                 data_set($instance, $property, collect($value));
-            } else if ($serialized = data_get($models, $property)) {
+            } elseif ($serialized = data_get($models, $property)) {
                 static::hydrateModel($serialized, $property, $request, $instance);
-            } else if ($serialized = data_get($modelCollections, $property)) {
+            } elseif ($serialized = data_get($modelCollections, $property)) {
                 static::hydrateModels($serialized, $property, $request, $instance);
-            } else if (in_array($property, $stringables)) {
+            } elseif (in_array($property, $stringables)) {
                 data_set($instance, $property, new Stringable($value));
-            } else if (in_array($property, $wireables) && version_compare(PHP_VERSION, '7.4', '>=')) {
+            } elseif (in_array($property, $wireables) && version_compare(PHP_VERSION, '7.4', '>=')) {
                 $type = (new \ReflectionClass($instance))
                     ->getProperty($property)
                     ->getType()
@@ -65,13 +64,12 @@ class HydratePublicProperties implements HydrationMiddleware
                     $instance->$property = $value;
                 } else {
                     // Do not use reflection for virtual component properties.
-                    if (property_exists($instance, $property) && (new ReflectionProperty($instance, $property))->getType()){
+                    if (property_exists($instance, $property) && (new ReflectionProperty($instance, $property))->getType()) {
                         is_null($value) || $instance->$property = $value;
                     } else {
                         $instance->$property = $value;
                     }
                 }
-
             }
         }
     }
@@ -89,15 +87,15 @@ class HydratePublicProperties implements HydrationMiddleware
                 is_bool($value) || is_null($value) || is_array($value) || is_numeric($value) || is_string($value)
             ) {
                 data_set($response, 'memo.data.'.$key, $value);
-            } else if ($value instanceof QueueableEntity) {
+            } elseif ($value instanceof QueueableEntity) {
                 static::dehydrateModel($value, $key, $response, $instance);
-            } else if ($value instanceof QueueableCollection) {
+            } elseif ($value instanceof QueueableCollection) {
                 static::dehydrateModels($value, $key, $response, $instance);
-            } else if ($value instanceof Collection) {
+            } elseif ($value instanceof Collection) {
                 $response->memo['dataMeta']['collections'][] = $key;
 
                 data_set($response, 'memo.data.'.$key, $value->toArray());
-            } else if ($value instanceof DateTime) {
+            } elseif ($value instanceof DateTime) {
                 if ($value instanceof IlluminateCarbon) {
                     $response->memo['dataMeta']['dates'][$key] = 'illuminate';
                 } elseif ($value instanceof Carbon) {
@@ -107,11 +105,11 @@ class HydratePublicProperties implements HydrationMiddleware
                 }
 
                 data_set($response, 'memo.data.'.$key, $value->format(\DateTimeInterface::ISO8601));
-            } else if ($value instanceof Stringable) {
+            } elseif ($value instanceof Stringable) {
                 $response->memo['dataMeta']['stringables'][] = $key;
 
                 data_set($response, 'memo.data.'.$key, $value->__toString());
-            } else if ($value instanceof Wireable && version_compare(PHP_VERSION, '7.4', '>=')) {
+            } elseif ($value instanceof Wireable && version_compare(PHP_VERSION, '7.4', '>=')) {
                 $response->memo['dataMeta']['wireables'][] = $key;
 
                 data_set($response, 'memo.data.'.$key, $value->toLivewire());
@@ -164,7 +162,8 @@ class HydratePublicProperties implements HydrationMiddleware
         $instance->$property = $models;
     }
 
-    public static function setDirtyData($model, $data) {
+    public static function setDirtyData($model, $data)
+    {
         foreach ($data as $key => $value) {
             if (is_array($value)) {
                 $existingData = data_get($model, $key);
@@ -216,7 +215,8 @@ class HydratePublicProperties implements HydrationMiddleware
         data_set($response, 'memo.data.'.$property, $filteredModelData);
     }
 
-    public static function filterData($instance, $property) {
+    public static function filterData($instance, $property)
+    {
         $data = $instance->$property->toArray();
 
         $rules = $instance->rulesForModel($property)->keys();
@@ -226,27 +226,28 @@ class HydratePublicProperties implements HydrationMiddleware
         return static::extractData($data, $rules, []);
     }
 
-    public static function processRules($rules) {
+    public static function processRules($rules)
+    {
         $rules = Collection::wrap($rules);
 
         // Map to groups
         $rules = $rules
             ->mapInto(Stringable::class)
-            ->mapToGroups(function($rule) {
+            ->mapToGroups(function ($rule) {
                 return [$rule->before('.')->__toString() => $rule->after('.')];
             });
 
         // Go through groups and process rules
-        $rules = $rules->mapWithKeys(function($rules, $group) {
+        $rules = $rules->mapWithKeys(function ($rules, $group) {
             // Split rules into collection and model rules
             [$collectionRules, $modelRules] = $rules
-                ->partition(function($rule) {
+                ->partition(function ($rule) {
                     return $rule->contains('.');
                 });
 
             // If collection rules exist, and value of * in model rules, remove * from model rule
             if ($collectionRules->count()) {
-                $modelRules = $modelRules->reject(function($value) {
+                $modelRules = $modelRules->reject(function ($value) {
                     return ((string) $value) === '*';
                 });
             }
@@ -267,10 +268,10 @@ class HydratePublicProperties implements HydrationMiddleware
 
     public static function extractData($data, $rules, $filteredData)
     {
-        foreach($rules as $key => $rule) {
+        foreach ($rules as $key => $rule) {
             if ($key === '*') {
                 if ($data) {
-                    foreach($data as $item) {
+                    foreach ($data as $item) {
                         $filteredData[] = static::extractData($item, $rule, []);
                     }
                 }
@@ -279,7 +280,7 @@ class HydratePublicProperties implements HydrationMiddleware
                     $newFilteredData = data_get($data, $key) instanceof stdClass ? new stdClass : [];
                     data_set($filteredData, $key, static::extractData(data_get($data, $key), $rule, $newFilteredData));
                 } else {
-                    if ($rule == "*") {
+                    if ($rule == '*') {
                         $filteredData = $data;
                     } elseif ((Arr::accessible($data) && Arr::exists($data, $rule)) || (is_object($data) && isset($data->{$rule}))) {
                         data_set($filteredData, $rule, data_get($data, $rule));

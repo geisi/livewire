@@ -23,8 +23,7 @@ class Test extends TestCase
                 ->assertValue('@author.posts.0.comments.0.author.name', 'Bob')
                 ->assertValue('@author.posts.0.comments.1.comment', 'Comment 2')
                 ->assertValue('@author.posts.0.comments.1.author.name', 'John')
-                ->assertValue('@author.posts.1.title', 'Post 2')
-                ;
+                ->assertValue('@author.posts.1.title', 'Post 2');
         });
     }
 
@@ -45,8 +44,7 @@ class Test extends TestCase
                 ->waitForLivewire()->type('@author.posts.0.comments.1.author.name', 'Mike')
                 ->assertSeeIn('@output.author.posts.0.comments.1.author.name', 'Mike')
 
-                ->waitForLivewire()->click('@save')
-                ;
+                ->waitForLivewire()->click('@save');
         });
 
         $author = Author::with(['posts', 'posts.comments', 'posts.comments.author'])->first();
@@ -66,7 +64,7 @@ class Author extends Model
 
     protected $rows = [
         ['id' => 1, 'name' => 'Bob', 'email' => 'bob@bob.com'],
-        ['id' => 2, 'name' => 'John', 'email' => 'john@john.com']
+        ['id' => 2, 'name' => 'John', 'email' => 'john@john.com'],
     ];
 
     public function posts()
@@ -88,7 +86,7 @@ class Post extends Model
 
     protected $rows = [
         ['id' => 1, 'title' => 'Post 1', 'description' => 'Post 1 Description', 'content' => 'Post 1 Content', 'author_id' => 1],
-        ['id' => 2, 'title' => 'Post 2', 'description' => 'Post 2 Description', 'content' => 'Post 2 Content', 'author_id' => 1]
+        ['id' => 2, 'title' => 'Post 2', 'description' => 'Post 2 Description', 'content' => 'Post 2 Content', 'author_id' => 1],
     ];
 
     public function author()
@@ -110,7 +108,7 @@ class Comment extends Model
 
     protected $rows = [
         ['id' => 1, 'comment' => 'Comment 1', 'post_id' => 1, 'author_id' => 1],
-        ['id' => 2, 'comment' => 'Comment 2', 'post_id' => 1, 'author_id' => 2]
+        ['id' => 2, 'comment' => 'Comment 2', 'post_id' => 1, 'author_id' => 2],
     ];
 
     public function author()

@@ -61,8 +61,7 @@ class Test extends TestCase
                 ->back()
                 ->assertQueryStringHas('page', '2')
                 ->assertDontSee('Post #7')
-                ->assertSee('Post #4')
-            ;
+                ->assertSee('Post #4');
         });
     }
 
@@ -99,8 +98,7 @@ class Test extends TestCase
                 ->assertSee('Post #1')
                 ->assertSee('Post #2')
                 ->assertSee('Post #3')
-                ->assertQueryStringMissing('page')
-            ;
+                ->assertQueryStringMissing('page');
         });
     }
 }

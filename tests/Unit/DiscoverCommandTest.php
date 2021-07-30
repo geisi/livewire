@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 
 class DiscoverCommandTest extends TestCase
 {

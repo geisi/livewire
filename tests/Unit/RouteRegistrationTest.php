@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use Livewire\Livewire;
-use Livewire\Component;
 use Illuminate\Support\Facades\Route;
+use Livewire\Component;
+use Livewire\Livewire;
 
 class RouteRegistrationTest extends TestCase
 {

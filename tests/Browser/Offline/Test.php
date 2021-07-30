@@ -21,7 +21,7 @@ class Test extends TestCase
                 ->assertMissing('@whileOffline')
 
                 /**
-                 * add element class while offline
+                 * add element class while offline.
                  */
                 ->online()
                 ->assertClassMissing('@addClass', 'foo')
@@ -29,7 +29,7 @@ class Test extends TestCase
                 ->assertHasClass('@addClass', 'foo')
 
                 /**
-                 * add element class while offline
+                 * add element class while offline.
                  */
                 ->online()
                 ->assertHasClass('@removeClass', 'hidden')
@@ -37,7 +37,7 @@ class Test extends TestCase
                 ->assertClassMissing('@removeClass', 'hidden')
 
                 /**
-                 * add element attribute while offline
+                 * add element attribute while offline.
                  */
                 ->online()
                 ->assertAttributeMissing('@withAttribute', 'disabled')
@@ -45,13 +45,12 @@ class Test extends TestCase
                 ->assertAttribute('@withAttribute', 'disabled', 'true')
 
                 /**
-                 * remove element attribute while offline
+                 * remove element attribute while offline.
                  */
                 ->online()
                 ->assertAttribute('@withoutAttribute', 'disabled', 'true')
                 ->offline()
-                ->assertAttributeMissing('@withoutAttribute', 'disabled')
-            ;
+                ->assertAttributeMissing('@withoutAttribute', 'disabled');
         });
     }
 }

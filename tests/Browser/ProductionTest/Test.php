@@ -2,8 +2,8 @@
 
 namespace Tests\Browser\ProductionTest;
 
-use Livewire\Livewire;
 use Laravel\Dusk\Browser;
+use Livewire\Livewire;
 use Tests\Browser\TestCase;
 
 class Test extends TestCase
@@ -15,10 +15,9 @@ class Test extends TestCase
             Livewire::visit($browser, Component::class)
                 /**
                  * Just need to check input is filled to ensure Livewire has started properly.
-                 * Have set app.debug to false inside mount method in component
+                 * Have set app.debug to false inside mount method in component.
                  */
-                ->assertInputValue('@foo', 'squishy')
-                ;
+                ->assertInputValue('@foo', 'squishy');
         });
     }
 }

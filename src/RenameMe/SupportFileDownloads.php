@@ -3,20 +3,24 @@
 namespace Livewire\RenameMe;
 
 use Livewire\Livewire;
-use Illuminate\Support\Str;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class SupportFileDownloads
 {
-    static function init() { return new static; }
+    public static function init()
+    {
+        return new static;
+    }
 
     protected $downloadsById = [];
 
-    function __construct()
+    public function __construct()
     {
         Livewire::listen('action.returned', function ($component, $action, $returned) {
-            if ($this->valueIsntAFileResponse($returned)) return;
+            if ($this->valueIsntAFileResponse($returned)) {
+                return;
+            }
 
             $response = $returned;
 
@@ -39,19 +43,21 @@ class SupportFileDownloads
         });
 
         Livewire::listen('component.dehydrate.subsequent', function ($component, $response) {
-            if (! $download = $this->downloadsById[$component->id] ?? false) return;
+            if (! $download = $this->downloadsById[$component->id] ?? false) {
+                return;
+            }
 
             $response->effects['download'] = $download;
         });
     }
 
-    function valueIsntAFileResponse($value)
+    public function valueIsntAFileResponse($value)
     {
         return ! $value instanceof StreamedResponse
             && ! $value instanceof BinaryFileResponse;
     }
 
-    function captureOutput($callback)
+    public function captureOutput($callback)
     {
         ob_start();
 
@@ -60,7 +66,7 @@ class SupportFileDownloads
         return ob_get_clean();
     }
 
-    function getFilenameFromContentDispositionHeader($header)
+    public function getFilenameFromContentDispositionHeader($header)
     {
         /**
          * The following conditionals are here to allow for quoted and
@@ -71,7 +77,6 @@ class SupportFileDownloads
          * Content-Disposition: attachment; filename=filename.jpg
          * Content-Disposition: attachment; filename="test file.jpg"
          */
-
         if (preg_match('/.*?filename="(.+?)"/', $header, $matches)) {
             return $matches[1];
         }

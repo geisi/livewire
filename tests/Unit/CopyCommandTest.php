@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 
 class CopyCommandTest extends TestCase
 {
@@ -40,16 +40,17 @@ class CopyCommandTest extends TestCase
         $this->assertTrue(File::exists($this->livewireClassesPath('Bob.php')));
         $this->assertFalse(File::exists($this->livewireViewsPath('bob.blade.php')));
     }
+
     /** @test */
     public function component_with_test_is_copied_by_copy_command()
     {
-        Artisan::call('make:livewire', ['name' => 'bob','--test'=>true]);
+        Artisan::call('make:livewire', ['name' => 'bob', '--test'=>true]);
 
         $this->assertTrue(File::exists($this->livewireClassesPath('Bob.php')));
         $this->assertTrue(File::exists($this->livewireViewsPath('bob.blade.php')));
         $this->assertTrue(File::exists($this->livewireTestsPath('BobTest.php')));
 
-        Artisan::call('livewire:copy', ['name' => 'bob', 'new-name' => 'lob','--test'=>true]);
+        Artisan::call('livewire:copy', ['name' => 'bob', 'new-name' => 'lob', '--test'=>true]);
 
         $this->assertTrue(File::exists($this->livewireClassesPath('Lob.php')));
         $this->assertTrue(File::exists($this->livewireViewsPath('lob.blade.php')));
@@ -59,16 +60,17 @@ class CopyCommandTest extends TestCase
         $this->assertTrue(File::exists($this->livewireViewsPath('bob.blade.php')));
         $this->assertTrue(File::exists($this->livewireTestsPath('BobTest.php')));
     }
+
     /** @test */
     public function component_is_copied_by_cp_command()
     {
-        Artisan::call('make:livewire', ['name' => 'bob','--test'=>true]);
+        Artisan::call('make:livewire', ['name' => 'bob', '--test'=>true]);
 
         $this->assertTrue(File::exists($this->livewireClassesPath('Bob.php')));
         $this->assertTrue(File::exists($this->livewireViewsPath('bob.blade.php')));
         $this->assertTrue(File::exists($this->livewireTestsPath('BobTest.php')));
 
-        Artisan::call('livewire:cp', ['name' => 'bob', 'new-name' => 'lob','--test'=>true]);
+        Artisan::call('livewire:cp', ['name' => 'bob', 'new-name' => 'lob', '--test'=>true]);
 
         $this->assertTrue(File::exists($this->livewireClassesPath('Lob.php')));
         $this->assertTrue(File::exists($this->livewireViewsPath('lob.blade.php')));
@@ -77,19 +79,18 @@ class CopyCommandTest extends TestCase
         $this->assertTrue(File::exists($this->livewireClassesPath('Bob.php')));
         $this->assertTrue(File::exists($this->livewireViewsPath('bob.blade.php')));
         $this->assertTrue(File::exists($this->livewireTestsPath('BobTest.php')));
-
     }
 
     /** @test */
     public function nested_component_is_copied_by_copy_command()
     {
-        Artisan::call('make:livewire', ['name' => 'bob.lob','--test'=>true]);
+        Artisan::call('make:livewire', ['name' => 'bob.lob', '--test'=>true]);
 
         $this->assertTrue(File::exists($this->livewireClassesPath('Bob/Lob.php')));
         $this->assertTrue(File::exists($this->livewireViewsPath('bob/lob.blade.php')));
         $this->assertTrue(File::exists($this->livewireTestsPath('Bob/LobTest.php')));
 
-        Artisan::call('livewire:copy', ['name' => 'bob.lob', 'new-name' => 'bob.lob.law','--test'=>true]);
+        Artisan::call('livewire:copy', ['name' => 'bob.lob', 'new-name' => 'bob.lob.law', '--test'=>true]);
 
         $this->assertTrue(File::exists($this->livewireClassesPath('Bob/Lob/Law.php')));
         $this->assertTrue(File::exists($this->livewireViewsPath('bob/lob/law.blade.php')));
@@ -98,19 +99,18 @@ class CopyCommandTest extends TestCase
         $this->assertTrue(File::exists($this->livewireClassesPath('Bob/Lob.php')));
         $this->assertTrue(File::exists($this->livewireViewsPath('bob/lob.blade.php')));
         $this->assertTrue(File::exists($this->livewireTestsPath('Bob/LobTest.php')));
-
     }
 
     /** @test */
     public function multiword_component_is_copied_by_copy_command()
     {
-        Artisan::call('make:livewire', ['name' => 'bob-lob','--test'=>true]);
+        Artisan::call('make:livewire', ['name' => 'bob-lob', '--test'=>true]);
 
         $this->assertTrue(File::exists($this->livewireClassesPath('BobLob.php')));
         $this->assertTrue(File::exists($this->livewireViewsPath('bob-lob.blade.php')));
         $this->assertTrue(File::exists($this->livewireTestsPath('BobLobTest.php')));
 
-        Artisan::call('livewire:copy', ['name' => 'bob-lob', 'new-name' => 'lob-law','--test'=>true]);
+        Artisan::call('livewire:copy', ['name' => 'bob-lob', 'new-name' => 'lob-law', '--test'=>true]);
 
         $this->assertTrue(File::exists($this->livewireClassesPath('/LobLaw.php')));
         $this->assertTrue(File::exists($this->livewireViewsPath('lob-law.blade.php')));
@@ -119,19 +119,18 @@ class CopyCommandTest extends TestCase
         $this->assertTrue(File::exists($this->livewireClassesPath('BobLob.php')));
         $this->assertTrue(File::exists($this->livewireViewsPath('bob-lob.blade.php')));
         $this->assertTrue(File::exists($this->livewireTestsPath('BobLobTest.php')));
-
     }
 
     /** @test */
     public function pascal_case_component_is_automatically_converted_by_copy_command()
     {
-        Artisan::call('make:livewire', ['name' => 'BobLob.BobLob','--test'=>true]);
+        Artisan::call('make:livewire', ['name' => 'BobLob.BobLob', '--test'=>true]);
 
         $this->assertTrue(File::exists($this->livewireClassesPath('BobLob/BobLob.php')));
         $this->assertTrue(File::exists($this->livewireViewsPath('bob-lob/bob-lob.blade.php')));
         $this->assertTrue(File::exists($this->livewireTestsPath('BobLob/BobLobTest.php')));
 
-        Artisan::call('livewire:copy', ['name' => 'BobLob.BobLob', 'new-name' => 'LobLaw.LobLaw','--test'=>true]);
+        Artisan::call('livewire:copy', ['name' => 'BobLob.BobLob', 'new-name' => 'LobLaw.LobLaw', '--test'=>true]);
 
         $this->assertTrue(File::exists($this->livewireClassesPath('BobLob/BobLob.php')));
         $this->assertTrue(File::exists($this->livewireViewsPath('bob-lob/bob-lob.blade.php')));

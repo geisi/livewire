@@ -61,7 +61,8 @@ class ComputedPropertyStub extends Component
     }
 }
 
-class FooDependency {
+class FooDependency
+{
     public $baz = 'bar';
 }
 

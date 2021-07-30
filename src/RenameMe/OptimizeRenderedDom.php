@@ -6,11 +6,14 @@ use Livewire\Livewire;
 
 class OptimizeRenderedDom
 {
-    static function init() { return new static; }
+    public static function init()
+    {
+        return new static;
+    }
 
     protected $htmlHashesByComponent = [];
 
-    function __construct()
+    public function __construct()
     {
         Livewire::listen('component.dehydrate.initial', function ($component, $response) {
             $response->memo['htmlHash'] = hash('crc32b', $response->effects['html']);

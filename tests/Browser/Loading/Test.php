@@ -85,8 +85,7 @@ class Test extends TestCase
                 ->tap($this->assertInitialState())
                 ->waitForLivewire()->click('@error-button')
                 ->click('#livewire-error')
-                ->tap($this->assertInitialState())
-            ;
+                ->tap($this->assertInitialState());
         });
     }
 
@@ -111,8 +110,7 @@ class Test extends TestCase
                     $b->assertScript('getComputedStyle(document.querySelector(\'[dusk="flex"]\')).display', 'flex');
                     $b->assertScript('getComputedStyle(document.querySelector(\'[dusk="table"]\')).display', 'table');
                     $b->assertScript('getComputedStyle(document.querySelector(\'[dusk="grid"]\')).display', 'grid');
-                })
-            ;
+                });
         });
     }
 

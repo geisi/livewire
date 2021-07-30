@@ -2,12 +2,8 @@
 
 namespace Tests\Unit;
 
-use Livewire\Livewire;
-use Livewire\Component;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
-use Livewire\Exceptions\CorruptComponentPayloadException;
-use Livewire\Exceptions\CannotBindToModelDataWithoutValidationRuleException;
+use Illuminate\Support\Facades\Schema;
 use Livewire\HydrationMiddleware\HydratePublicProperties;
 
 class PublicPropertyHydrationAndDehydrationTest extends TestCase
@@ -70,12 +66,12 @@ class PublicPropertyHydrationAndDehydrationTest extends TestCase
                         [
                             'comment' => '2 Comment',
                             'author' => [
-                                'name' => 'gniht'
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                                'name' => 'gniht',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $results = HydratePublicProperties::setDirtyData($model, $dirtyData);
@@ -219,13 +215,13 @@ class PublicPropertyHydrationAndDehydrationTest extends TestCase
                         [
                             'comment' => 'Comment 1',
                             'author' => [
-                                'name' => 'bar'
+                                'name' => 'bar',
                             ],
                         ],
                         [
                             'comment' => 'Comment 2',
                             'author' => [
-                                'name' => 'thing'
+                                'name' => 'thing',
                             ],
                         ],
                     ],
@@ -403,13 +399,13 @@ class PublicPropertyHydrationAndDehydrationTest extends TestCase
                             [
                                 'comment' => 'Comment 1',
                                 'author' => [
-                                    'name' => 'bar'
+                                    'name' => 'bar',
                                 ],
                             ],
                             [
                                 'comment' => 'Comment 2',
                                 'author' => [
-                                    'name' => 'thing'
+                                    'name' => 'thing',
                                 ],
                             ],
                         ],
@@ -463,13 +459,13 @@ class PublicPropertyHydrationAndDehydrationTest extends TestCase
                             [
                                 'comment' => 'Comment 1',
                                 'author' => [
-                                    'name' => 'bar'
+                                    'name' => 'bar',
                                 ],
                             ],
                             [
                                 'comment' => 'Comment 2',
                                 'author' => [
-                                    'name' => 'thing'
+                                    'name' => 'thing',
                                 ],
                             ],
                         ],

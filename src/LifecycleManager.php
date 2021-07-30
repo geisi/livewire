@@ -2,7 +2,6 @@
 
 namespace Livewire;
 
-use Livewire\ImplicitlyBoundMethod;
 use Illuminate\Validation\ValidationException;
 
 class LifecycleManager
@@ -45,7 +44,7 @@ class LifecycleManager
     {
         $name = app('livewire')->getAlias(get_class($component), $component->getName());
 
-        return tap(new static, function ($instance) use ($component,  $name) {
+        return tap(new static, function ($instance) use ($component, $name) {
             $instance->instance = $component;
             $instance->request = new Request([
                 'fingerprint' => [

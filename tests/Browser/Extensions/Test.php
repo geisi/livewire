@@ -22,8 +22,7 @@ class Test extends TestCase
                 })
                 ->assertScript('window.renameMe', false)
                 ->waitForLivewire()->click('@refresh')
-                ->assertScript('window.renameMe', true)
-            ;
+                ->assertScript('window.renameMe', true);
         });
     }
 }

@@ -2,12 +2,12 @@
 
 namespace Tests\Unit;
 
-use Livewire\Livewire;
-use Livewire\Component;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
-use Livewire\Exceptions\CorruptComponentPayloadException;
+use Illuminate\Support\Facades\Schema;
+use Livewire\Component;
 use Livewire\Exceptions\CannotBindToModelDataWithoutValidationRuleException;
+use Livewire\Exceptions\CorruptComponentPayloadException;
+use Livewire\Livewire;
 
 class ModelAttributesCanBeBoundDirectlyTest extends TestCase
 {
@@ -41,7 +41,6 @@ class ModelAttributesCanBeBoundDirectlyTest extends TestCase
             ->call('refreshModel')
             ->assertSet('model.title', 'bar');
     }
-
 
     /** @test */
     public function a_non_existant_eloquent_model_can_be_set()
@@ -147,7 +146,9 @@ class ComponentWithModelsProperty extends Component
         $this->models = $models;
     }
 
-    public function refresh() {}
+    public function refresh()
+    {
+    }
 
     public function render()
     {

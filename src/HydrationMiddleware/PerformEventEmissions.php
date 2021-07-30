@@ -2,8 +2,8 @@
 
 namespace Livewire\HydrationMiddleware;
 
-use Livewire\Livewire;
 use Illuminate\Validation\ValidationException;
+use Livewire\Livewire;
 
 class PerformEventEmissions implements HydrationMiddleware
 {
@@ -11,7 +11,9 @@ class PerformEventEmissions implements HydrationMiddleware
     {
         try {
             foreach ($request->updates as $update) {
-                if ($update['type'] !== 'fireEvent') continue;
+                if ($update['type'] !== 'fireEvent') {
+                    continue;
+                }
 
                 $event = $update['payload']['event'];
                 $params = $update['payload']['params'];

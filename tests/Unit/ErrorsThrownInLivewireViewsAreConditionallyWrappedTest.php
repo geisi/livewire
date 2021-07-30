@@ -2,13 +2,13 @@
 
 namespace Tests\Unit;
 
-use Exception;
 use ErrorException;
-use Livewire\Livewire;
-use Livewire\Component;
+use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\View;
+use Livewire\Component;
 use Livewire\Exceptions\BypassViewHandler;
+use Livewire\Livewire;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

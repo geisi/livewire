@@ -36,8 +36,7 @@ class Test extends TestCase
                 ->assertSeeIn('@middleware', '["Tests\\\\Browser\\\\AllowListedMiddleware"]')
                 ->assertSeeIn('@path', 'livewire-dusk/Tests%5CBrowser%5CSecurity%5CComponent')
                 ->assertSeeIn('@nested-middleware', '["Tests\\\\Browser\\\\AllowListedMiddleware"]')
-                ->assertSeeIn('@path', 'livewire-dusk/Tests%5CBrowser%5CSecurity%5CComponent')
-            ;
+                ->assertSeeIn('@path', 'livewire-dusk/Tests%5CBrowser%5CSecurity%5CComponent');
         });
     }
 
@@ -85,7 +84,6 @@ JS;
                 })
                 ->waitForText('response-ready: ')
                 ->assertDontSee('Protected Content');
-            ;
         });
     }
 
@@ -127,7 +125,6 @@ JS;
                 })
                 ->waitForText('response-ready: ')
                 ->assertDontSee('Protected Content');
-            ;
         });
     }
 }

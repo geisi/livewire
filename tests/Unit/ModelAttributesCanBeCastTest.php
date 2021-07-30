@@ -95,7 +95,6 @@ class ModelAttributesCanBeCastTest extends TestCase
     /** @test */
     public function can_cast_real_attributes_from_model_casts_definition()
     {
-
         Livewire::test(ComponentForModelAttributeCasting::class)
             ->assertSet('model.real_number', 2.0)
             ->assertPayloadSet('model.real_number', 2.0)
@@ -136,7 +135,6 @@ class ModelAttributesCanBeCastTest extends TestCase
     /** @test */
     public function can_cast_double_precision_attributes_from_model_casts_definition()
     {
-
         Livewire::test(ComponentForModelAttributeCasting::class)
             ->assertSet('model.double_precision_number', 4.0)
             ->assertPayloadSet('model.double_precision_number', 4.0)
@@ -255,7 +253,6 @@ class ModelAttributesCanBeCastTest extends TestCase
     /** @test */
     public function can_cast_array_attributes_from_model_casts_definition()
     {
-
         Livewire::test(ComponentForModelAttributeCasting::class)
             ->assertSet('model.array_list', [])
             ->assertPayloadSet('model.array_list', [])
@@ -284,7 +281,6 @@ class ModelAttributesCanBeCastTest extends TestCase
     /** @test */
     public function can_cast_collection_attributes_from_model_casts_definition()
     {
-
         Livewire::test(ComponentForModelAttributeCasting::class)
             ->assertSet('model.collected_list', collect([true, false]))
             ->assertPayloadSet('model.collected_list', [true, false])
@@ -299,7 +295,6 @@ class ModelAttributesCanBeCastTest extends TestCase
     /** @test */
     public function can_cast_object_attributes_from_model_casts_definition()
     {
-
         Livewire::test(ComponentForModelAttributeCasting::class)
             ->assertSet('model.object_value', (object) ['name' => 'Marian', 'email' => 'marian@likes.pizza'])
             ->assertPayloadSet('model.object_value', (object) ['name' => 'Marian', 'email' => 'marian@likes.pizza'])
@@ -374,8 +369,8 @@ class ModelForAttributeCasting extends Model
                 'json_list' => json_encode([1, 2, 3]),
                 'collected_list' => json_encode([true, false]),
                 'object_value' => json_encode(['name' => 'Marian', 'email' => 'marian@likes.pizza']),
-                'custom_caster' => 'dumb answer'
-            ]
+                'custom_caster' => 'dumb answer',
+            ],
         ];
     }
 }
@@ -451,10 +446,11 @@ class ComponentForModelAttributeCasting extends Component
         'model.object_value' => ['required'],
         'model.object_value.name' => ['required'],
         'model.object_value.email' => ['required', 'email'],
-        'model.custom_caster' => ['required']
+        'model.custom_caster' => ['required'],
     ];
 
-    public function mount() {
+    public function mount()
+    {
         $this->model = ModelForAttributeCasting::first();
     }
 

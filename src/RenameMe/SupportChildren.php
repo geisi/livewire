@@ -6,9 +6,12 @@ use Livewire\Livewire;
 
 class SupportChildren
 {
-    static function init() { return new static; }
+    public static function init()
+    {
+        return new static;
+    }
 
-    function __construct()
+    public function __construct()
     {
         Livewire::listen('component.dehydrate', function ($component, $response) {
             $response->memo['children'] = $component->getRenderedChildren();

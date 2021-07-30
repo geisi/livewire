@@ -42,7 +42,7 @@ class Test extends TestCase
                 ->assertSeeIn('@output', 'foo')
 
                 /**
-                 * wire:click.self
+                 * wire:click.self.
                  */
                 ->waitForLivewire()->click('@baz.inner')
                 ->assertSeeIn('@output', 'foo')
@@ -50,7 +50,7 @@ class Test extends TestCase
                 ->assertSeeIn('@output', 'baz')
 
                 /**
-                 * Blur event and click event get sent together
+                 * Blur event and click event get sent together.
                  */
                 ->click('@bop.input') // Fucus.
                 ->assertSeeIn('@output', 'baz')
@@ -58,7 +58,7 @@ class Test extends TestCase
                 ->assertSeeIn('@output', 'bazbopbop')
 
                 /**
-                 * Two keydowns
+                 * Two keydowns.
                  */
                 ->waitForLivewire()->keys('@bob', '{enter}')
                 ->assertSeeIn('@output', 'bazbopbopbobbob')
@@ -73,19 +73,19 @@ class Test extends TestCase
                 ->assertSeeIn('@output', 'lob')
 
                 /**
-                 * keydown.shift.enter
+                 * keydown.shift.enter.
                  */
                 ->waitForLivewire()->keys('@law', '{shift}', '{enter}')
                 ->assertSeeIn('@output', 'law')
 
                 /**
-                 * keydown.space
+                 * keydown.space.
                  */
                 ->waitForLivewire()->keys('@spa', '{space}')
                 ->assertSeeIn('@output', 'spa')
 
                 /**
-                 * Elements are marked as read-only during form submission
+                 * Elements are marked as read-only during form submission.
                  */
                 ->tap(function ($b) {
                     $this->assertNull($b->attribute('@blog.button', 'disabled'));
@@ -116,13 +116,12 @@ class Test extends TestCase
                 ->click('#livewire-error')
 
                 /**
-                 * keydown.debounce
+                 * keydown.debounce.
                  */
                 ->keys('@bap', 'x')
                 ->pause(50)
                 ->waitForLivewire()->assertDontSeeIn('@output', 'bap')
-                ->assertSeeIn('@output', 'bap')
-            ;
+                ->assertSeeIn('@output', 'bap');
         });
     }
 }

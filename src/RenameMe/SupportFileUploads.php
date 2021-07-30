@@ -8,14 +8,19 @@ use Livewire\WithFileUploads;
 
 class SupportFileUploads
 {
-    static function init() { return new static; }
+    public static function init()
+    {
+        return new static;
+    }
 
-    function __construct()
+    public function __construct()
     {
         Livewire::listen('property.hydrate', function ($property, $value, $component, $request) {
             $uses = array_flip(class_uses_recursive($component));
 
-            if (! in_array(WithFileUploads::class, $uses)) return;
+            if (! in_array(WithFileUploads::class, $uses)) {
+                return;
+            }
 
             if (TemporaryUploadedFile::canUnserialize($value)) {
                 $component->{$property} = TemporaryUploadedFile::unserializeFromLivewireRequest($value);
@@ -25,7 +30,9 @@ class SupportFileUploads
         Livewire::listen('property.dehydrate', function ($property, $value, $component, $response) {
             $uses = array_flip(class_uses_recursive($component));
 
-            if (! in_array(WithFileUploads::class, $uses)) return;
+            if (! in_array(WithFileUploads::class, $uses)) {
+                return;
+            }
 
             $newValue = $this->dehydratePropertyFromWithFileUploads($value);
 

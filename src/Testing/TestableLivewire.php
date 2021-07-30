@@ -2,18 +2,17 @@
 
 namespace Livewire\Testing;
 
-use Mockery;
-use Livewire\Livewire;
-use Illuminate\Routing\Route;
-use Illuminate\Support\Facades\View;
-use Livewire\GenerateSignedUploadUrl;
-use Illuminate\Routing\RouteCollection;
-use Illuminate\Support\Traits\Macroable;
 use Facades\Livewire\GenerateSignedUploadUrl as GenerateSignedUploadUrlFacade;
+use Illuminate\Routing\Route;
+use Illuminate\Routing\RouteCollection;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Traits\Macroable;
 use Livewire\Exceptions\PropertyNotFoundException;
+use Livewire\GenerateSignedUploadUrl;
+use Livewire\Livewire;
 use Livewire\LivewireManager;
-
 use function Livewire\str;
+use Mockery;
 
 /** @mixin \Illuminate\Testing\TestResponse */
 class TestableLivewire
@@ -51,7 +50,7 @@ class TestableLivewire
             $this->lastValidator = null;
         });
 
-        Livewire::listen('component.dehydrate', function($component) {
+        Livewire::listen('component.dehydrate', function ($component) {
             static::$instancesById[$component->id] = $component;
 
             $this->lastErrorBag = $component->getErrorBag();
@@ -103,7 +102,9 @@ class TestableLivewire
 
         foreach ($output['serverMemo'] as $key => $newValue) {
             if ($key === 'data') {
-                if ($isInitial) data_set($this->payload, 'serverMemo.data', []);
+                if ($isInitial) {
+                    data_set($this->payload, 'serverMemo.data', []);
+                }
 
                 foreach ($newValue as $dataKey => $dataValue) {
                     data_set($this->payload, 'serverMemo.data.'.$dataKey, $dataValue);
@@ -223,7 +224,7 @@ class TestableLivewire
                 } catch (\Throwable $e) {
                     if ($e instanceof PropertyNotFoundException) {
                         $value = null;
-                    } else if (str($e->getMessage())->contains('must not be accessed before initialization')) {
+                    } elseif (str($e->getMessage())->contains('must not be accessed before initialization')) {
                         $value = null;
                     } else {
                         throw $e;
@@ -249,7 +250,7 @@ class TestableLivewire
         }
 
         $this->lastResponse->$method(...$params);
-        
+
         return $this;
     }
 }

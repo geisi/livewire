@@ -12,7 +12,7 @@ trait MakesAssertions
 {
     public function assertSet($name, $value)
     {
-        if (!is_string($value) && is_callable($value)) {
+        if (! is_string($value) && is_callable($value)) {
             PHPUnit::assertTrue($value($this->get($name)));
         } else {
             PHPUnit::assertEquals($value, $this->get($name));
@@ -174,7 +174,7 @@ trait MakesAssertions
 
             $test = $event && $params[0]($event['event'], $event['params']);
         } else {
-            $test = (bool)collect(data_get($this->payload, 'effects.emits'))->first(function ($item) use ($value, $params) {
+            $test = (bool) collect(data_get($this->payload, 'effects.emits'))->first(function ($item) use ($value, $params) {
                 return $item['event'] === $value
                     && $item['params'] === $params;
             });
@@ -201,7 +201,7 @@ trait MakesAssertions
 
             $test = $event && $data($event['event'], $event['data']);
         } else {
-            $test = (bool)collect($this->payload['effects']['dispatches'])->first(function ($item) use ($name, $data) {
+            $test = (bool) collect($this->payload['effects']['dispatches'])->first(function ($item) use ($name, $data) {
                 return $item['event'] === $name
                     && $item['data'] === $data;
             });
@@ -220,7 +220,7 @@ trait MakesAssertions
 
         PHPUnit::assertTrue($errors->isNotEmpty(), 'Component has no errors.');
 
-        $keys = (array)$keys;
+        $keys = (array) $keys;
 
         foreach ($keys as $key => $value) {
             if (is_int($key)) {
@@ -229,7 +229,7 @@ trait MakesAssertions
                 $failed = optional($this->lastValidator)->failed() ?: [];
                 $rules = array_keys(Arr::get($failed, $key, []));
 
-                foreach ((array)$value as $rule) {
+                foreach ((array) $value as $rule) {
                     PHPUnit::assertContains(Str::studly($rule), $rules, "Component has no [{$rule}] errors for [{$key}] attribute.");
                 }
             }
@@ -243,12 +243,12 @@ trait MakesAssertions
         $errors = $this->lastErrorBag;
 
         if (empty($keys)) {
-            PHPUnit::assertTrue($errors->isEmpty(), 'Component has errors: "' . implode('", "', $errors->keys()) . '"');
+            PHPUnit::assertTrue($errors->isEmpty(), 'Component has errors: "'.implode('", "', $errors->keys()).'"');
 
             return $this;
         }
 
-        $keys = (array)$keys;
+        $keys = (array) $keys;
 
         foreach ($keys as $key => $value) {
             if (is_int($key)) {
@@ -257,7 +257,7 @@ trait MakesAssertions
                 $failed = optional($this->lastValidator)->failed() ?: [];
                 $rules = array_keys(Arr::get($failed, $key, []));
 
-                foreach ((array)$value as $rule) {
+                foreach ((array) $value as $rule) {
                     PHPUnit::assertNotContains(Str::studly($rule), $rules, "Component has [{$rule}] errors for [{$key}] attribute.");
                 }
             }
@@ -274,7 +274,7 @@ trait MakesAssertions
             'Component did not perform a redirect.'
         );
 
-        if (!is_null($uri)) {
+        if (! is_null($uri)) {
             PHPUnit::assertSame(url($uri), url($this->payload['effects']['redirect']));
         }
 
@@ -283,7 +283,7 @@ trait MakesAssertions
 
     public function assertNoRedirect()
     {
-        PHPUnit::assertTrue(!isset($this->payload['effects']['redirect']));
+        PHPUnit::assertTrue(! isset($this->payload['effects']['redirect']));
 
         return $this;
     }

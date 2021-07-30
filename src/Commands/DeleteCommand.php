@@ -32,15 +32,23 @@ class DeleteCommand extends FileManipulationCommand
         $test = $this->option('test');
 
         $class = $this->removeClass($force);
-        if (! $inline) $view = $this->removeView($force);
-        if ($test) $test = $this->removeTest($force);
+        if (! $inline) {
+            $view = $this->removeView($force);
+        }
+        if ($test) {
+            $test = $this->removeTest($force);
+        }
 
         $this->refreshComponentAutodiscovery();
 
         $this->line("<options=bold,reverse;fg=yellow> COMPONENT DESTROYED </> 🦖💫\n");
         $class && $this->line("<options=bold;fg=yellow>CLASS:</> {$this->parser->relativeClassPath()}");
-        if (! $inline) $view && $this->line("<options=bold;fg=yellow>VIEW:</>  {$this->parser->relativeViewPath()}");
-        if ($test) $test && $this->line("<options=bold;fg=yellow>Test:</>  {$this->parser->relativeTestPath()}");
+        if (! $inline) {
+            $view && $this->line("<options=bold;fg=yellow>VIEW:</>  {$this->parser->relativeViewPath()}");
+        }
+        if ($test) {
+            $test && $this->line("<options=bold;fg=yellow>Test:</>  {$this->parser->relativeTestPath()}");
+        }
     }
 
     protected function removeTest($force = false)
@@ -50,6 +58,7 @@ class DeleteCommand extends FileManipulationCommand
         if (! File::exists($testPath) && ! $force) {
             $this->line("<options=bold,reverse;fg=red> WHOOPS-IE-TOOTLES </> 😳 \n");
             $this->line("<fg=red;options=bold>Test doesn't exist:</> {$this->parser->relativeTestPath()}");
+
             return false;
         }
 
@@ -57,6 +66,7 @@ class DeleteCommand extends FileManipulationCommand
 
         return $testPath;
     }
+
     protected function removeClass($force = false)
     {
         $classPath = $this->parser->classPath();

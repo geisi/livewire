@@ -27,22 +27,22 @@ class ComponentTraitsTest extends TestCase
     {
         Livewire::test(ComponentWithTwoTraitsStub::class)
             ->assertSet('hooksFromTrait', [
-                'initialized', 'secondInitialized', 
-                'hydrate', 'secondHydrate', 
+                'initialized', 'secondInitialized',
+                'hydrate', 'secondHydrate',
                 'mount', 'secondMount',
                 'rendering', 'secondRendering',
-                'rendered:show-name', 'secondRendered:show-name', 
-                'dehydrate', 'secondDehydrate'
+                'rendered:show-name', 'secondRendered:show-name',
+                'dehydrate', 'secondDehydrate',
             ])
             ->set('foo', 'bar')
             ->assertSet('hooksFromTrait', [
-                'initialized', 'secondInitialized', 
-                'hydrate', 'secondHydrate', 
-                'updating:foobar', 'secondUpdating:foobar', 
-                'updated:foobar', 'secondUpdated:foobar', 
-                'rendering', 'secondRendering', 
-                'rendered:show-name', 'secondRendered:show-name', 
-                'dehydrate', 'secondDehydrate'
+                'initialized', 'secondInitialized',
+                'hydrate', 'secondHydrate',
+                'updating:foobar', 'secondUpdating:foobar',
+                'updated:foobar', 'secondUpdated:foobar',
+                'rendering', 'secondRendering',
+                'rendered:show-name', 'secondRendered:show-name',
+                'dehydrate', 'secondDehydrate',
             ]);
     }
 }
@@ -148,7 +148,6 @@ trait SecondTraitForComponent
     {
         $this->hooksFromTrait[] = 'secondInitialized';
     }
-
 }
 
 class ComponentWithTwoTraitsStub extends ComponentWithTraitStub

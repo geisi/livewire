@@ -4,7 +4,6 @@ namespace Tests\Unit;
 
 use Livewire\Component;
 use Livewire\Livewire;
-use Livewire\LivewireManager;
 
 class ComponentEventsTest extends TestCase
 {
@@ -183,7 +182,8 @@ class ReceivesEventsWithDynamicListeners extends Component
         $this->listener = $listener;
     }
 
-    protected function getListeners() {
+    protected function getListeners()
+    {
         return [$this->listener => 'handle'];
     }
 
@@ -211,12 +211,12 @@ class DispatchesBrowserEvents extends Component
     }
 }
 
-class ItCanReceiveEventUsingClassname extends Component {
-
+class ItCanReceiveEventUsingClassname extends Component
+{
     public $bar;
 
     public $listeners = [
-        'foo' => 'bar'
+        'foo' => 'bar',
     ];
 
     public function onBar($value)

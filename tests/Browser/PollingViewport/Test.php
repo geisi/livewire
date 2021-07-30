@@ -13,12 +13,14 @@ class Test extends TestCase
         $this->browse(function (Browser $browser) {
             Livewire::visit($browser, Component::class)
                 ->assertSeeIn('@output', '1')
-                ->waitForLivewire(function () {})
+                ->waitForLivewire(function () {
+                })
                 ->assertSeeIn('@output', '2')
                 ->scrollTo('#bottom')
                 ->pause(2000)
                 ->scrollTo('#top')
-                ->waitForLivewire(function () {})
+                ->waitForLivewire(function () {
+                })
                 ->assertSeeIn('@output', '3');
         });
     }

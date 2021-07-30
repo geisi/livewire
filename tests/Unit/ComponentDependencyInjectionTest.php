@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
+use Illuminate\Routing\UrlGenerator;
 use Livewire\Component;
 use Livewire\Livewire;
-use Illuminate\Routing\UrlGenerator;
 
 class ComponentDependencyInjectionTest extends TestCase
 {
@@ -181,7 +181,7 @@ class CustomComponent extends Component
     public function render(CustomService $service)
     {
         return view('show-property-value', [
-            'message' => $service->results()
+            'message' => $service->results(),
         ]);
     }
 }

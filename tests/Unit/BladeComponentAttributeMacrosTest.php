@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use Livewire\Livewire;
-use Livewire\Component;
 use Illuminate\View\ComponentAttributeBag;
+use Livewire\Component;
+use Livewire\Livewire;
 
 class BladeComponentAttributeMacrosTest extends TestCase
 {

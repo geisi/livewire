@@ -2,15 +2,15 @@
 
 namespace Livewire;
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\View\View;
 use BadMethodCallException;
-use Illuminate\Support\Str;
-use Illuminate\Routing\Route;
-use Illuminate\Support\ViewErrorBag;
-use Illuminate\Support\Traits\Macroable;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Routing\Route;
+use Illuminate\Support\Str;
+use Illuminate\Support\Traits\Macroable;
+use Illuminate\Support\ViewErrorBag;
+use Illuminate\View\View;
 use Livewire\Exceptions\CannotUseReservedLivewireComponentProperties;
 use Livewire\Exceptions\PropertyNotFoundException;
 
@@ -46,7 +46,7 @@ abstract class Component
             $componentParams = (new ImplicitRouteBinding($container))
                 ->resolveAllParameters($route, $this);
         } catch (ModelNotFoundException $exception) {
-            if (method_exists($route,'getMissing') && $route->getMissing()) {
+            if (method_exists($route, 'getMissing') && $route->getMissing()) {
                 return $route->getMissing()(request());
             }
 
@@ -121,7 +121,9 @@ abstract class Component
 
     public function renderToView()
     {
-        if ($this->shouldSkipRender) return null;
+        if ($this->shouldSkipRender) {
+            return null;
+        }
 
         Livewire::dispatch('component.rendering', $this);
 
@@ -148,7 +150,9 @@ abstract class Component
 
     public function output($errors = null)
     {
-        if ($this->shouldSkipRender) return null;
+        if ($this->shouldSkipRender) {
+            return null;
+        }
 
         $view = $this->preRenderedView;
 
@@ -210,8 +214,9 @@ abstract class Component
     public function forgetComputed($key = null)
     {
         if (is_null($key)) {
-           $this->computedPropertyCache = [];
-           return;
+            $this->computedPropertyCache = [];
+
+            return;
         }
 
         $keys = is_array($key) ? $key : func_get_args();

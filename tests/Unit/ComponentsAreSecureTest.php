@@ -3,10 +3,10 @@
 namespace Tests\Unit;
 
 use Livewire\Component;
-use Livewire\Exceptions\NonPublicComponentMethodCall;
 use Livewire\Exceptions\CorruptComponentPayloadException;
-use Livewire\Exceptions\PublicPropertyNotFoundException;
 use Livewire\Exceptions\MethodNotFoundException;
+use Livewire\Exceptions\NonPublicComponentMethodCall;
+use Livewire\Exceptions\PublicPropertyNotFoundException;
 
 class ComponentsAreSecureTest extends TestCase
 {

@@ -3,8 +3,8 @@
 namespace Livewire;
 
 use Exception;
-use ReflectionClass;
 use Illuminate\Filesystem\Filesystem;
+use ReflectionClass;
 use Symfony\Component\Finder\SplFileInfo;
 
 class LivewireComponentsFinder

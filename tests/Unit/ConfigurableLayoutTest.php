@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use Livewire\Component;
 use Illuminate\Support\Facades\Route;
+use Livewire\Component;
 
 class ConfigurableLayoutTest extends TestCase
 {

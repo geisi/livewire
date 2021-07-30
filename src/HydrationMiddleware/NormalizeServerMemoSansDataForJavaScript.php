@@ -12,9 +12,11 @@ class NormalizeServerMemoSansDataForJavaScript extends NormalizeDataForJavaScrip
     public static function dehydrate($instance, $response)
     {
         foreach ($response->memo as $key => $value) {
-            if ($key === 'data') continue;
+            if ($key === 'data') {
+                continue;
+            }
 
-             if (is_array($value)) {
+            if (is_array($value)) {
                 $response->memo[$key] = static::reindexArrayWithNumericKeysOtherwiseJavaScriptWillMessWithTheOrder($value);
             }
         }

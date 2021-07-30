@@ -34,7 +34,6 @@ class ImplicitlyBoundMethodTest extends TestCase
         $result = ImplicitlyBoundMethodTester::testSequentialSubstitution([$stub, 'unresolvable'], ['foo', 'bar' => 'bar']);
         $this->assertEqualsCanonicalizing(['foo'=>'foo', 'bar'=>'bar'], $result);
 
-
         $stub = new ContainerTestCallStub;
         $result = ImplicitlyBoundMethodTester::testSequentialSubstitution([$stub, 'inject'], ['foo']);
         $this->assertEqualsCanonicalizing(['default'=>'foo'], $result);
@@ -195,6 +194,7 @@ class ImplicitlyBoundMethodTest extends TestCase
      * ImplicitlyBoundMethod had no adverse impacts when extending BoundMethod.
      *************************************************************************/
     /** @test */
+
     /** @test */
     public function call_with_at_sign_based_class_references()
     {
@@ -423,6 +423,7 @@ class ImplicitlyBoundMethodTester extends ImplicitlyBoundMethod
         foreach (static::getCallReflector($callback)->getParameters() as $parameter) {
             static::substituteNameBindingForCallParameter($parameter, $parameters, $paramIndex);
         }
+
         return $parameters;
     }
 }
@@ -437,6 +438,7 @@ class ContainerTestModel extends \Illuminate\Database\Eloquent\Model
     public function resolveRouteBinding($value, $field = null)
     {
         $this->value = func_get_args();
+
         return $this;
     }
 }
@@ -457,6 +459,7 @@ class NullContainerTestModel extends \Illuminate\Database\Eloquent\Model
 class ContainerCallConcreteStub
 {
     public $value;
+
     public function __construct()
     {
         $this->value = func_get_args();

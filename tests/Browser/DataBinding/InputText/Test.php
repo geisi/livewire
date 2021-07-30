@@ -2,8 +2,8 @@
 
 namespace Tests\Browser\DataBinding\InputText;
 
-use Livewire\Livewire;
 use Laravel\Dusk\Browser;
+use Livewire\Livewire;
 use Tests\Browser\TestCase;
 
 class Test extends TestCase
@@ -18,13 +18,13 @@ class Test extends TestCase
                 ->assertInputValue('@foo', 'initial')
 
                 /**
-                 * Can set value
+                 * Can set value.
                  */
                 ->waitForLivewire()->type('@foo', 'subsequent')
                 ->assertSeeIn('@foo.output', 'subsequent')
 
                 /**
-                 * Can change value
+                 * Can change value.
                  */
                 ->assertDontSeeIn('@foo.output', 'changed')
                 ->waitForLivewire()->click('@foo.change')
@@ -35,7 +35,9 @@ class Test extends TestCase
                  */
                 ->waitForLivewire(function ($b) {
                     $b->click('@foo')
-                    ->tap(function ($b) { $b->script('window.livewire.first().set("foo", "changed-again")'); });
+                    ->tap(function ($b) {
+                        $b->script('window.livewire.first().set("foo", "changed-again")');
+                    });
                 })
                 ->assertInputValue('@foo', 'changed-again')
 
@@ -44,19 +46,21 @@ class Test extends TestCase
                  */
                 ->waitForLivewire(function ($b) {
                     $b->click('@foo')
-                    ->tap(function ($b) { $b->script('window.livewire.first().sync("foo", "changed-alot")'); });
+                    ->tap(function ($b) {
+                        $b->script('window.livewire.first().sync("foo", "changed-alot")');
+                    });
                 })
                 ->assertSeeIn('@foo.output', 'changed-alot')
                 ->assertInputValue('@foo', 'changed-again')
 
                 /**
-                 * Can set nested value
+                 * Can set nested value.
                  */
                 ->waitForLivewire()->type('@bar', 'nested')
                 ->assertSeeIn('@bar.output', '{"baz":{"bob":"nested"}}')
 
                 /**
-                 * Can set lazy value
+                 * Can set lazy value.
                  */
                 ->click('@baz') // Set focus.
                 ->type('@baz', 'lazy')
@@ -66,7 +70,7 @@ class Test extends TestCase
                 ->assertSeeIn('@baz.output', 'lazy')
 
                 /**
-                 * Can set deferred value
+                 * Can set deferred value.
                  */
                 ->click('@bob') // Set focus.
                 ->type('@bob', 'deferred')
@@ -75,8 +79,7 @@ class Test extends TestCase
                 ->pause(150) // Pause for upper-bound of most round-trip lengths.
                 ->assertDontSeeIn('@bob.output', 'deferred')
                 ->waitForLivewire()->click('@refresh')
-                ->assertSeeIn('@bob.output', 'deferred')
-                ;
+                ->assertSeeIn('@bob.output', 'deferred');
         });
     }
 }

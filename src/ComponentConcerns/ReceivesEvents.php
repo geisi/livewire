@@ -10,7 +10,8 @@ trait ReceivesEvents
     protected $dispatchQueue = [];
     protected $listeners = [];
 
-    protected function getListeners() {
+    protected function getListeners()
+    {
         return $this->listeners;
     }
 

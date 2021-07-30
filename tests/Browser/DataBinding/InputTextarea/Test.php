@@ -2,8 +2,8 @@
 
 namespace Tests\Browser\DataBinding\InputTextarea;
 
-use Livewire\Livewire;
 use Laravel\Dusk\Browser;
+use Livewire\Livewire;
 use Tests\Browser\TestCase;
 
 class Test extends TestCase
@@ -13,14 +13,14 @@ class Test extends TestCase
         $this->browse(function (Browser $browser) {
             Livewire::visit($browser, Component::class)
                 /**
-                 * Can change value
+                 * Can change value.
                  */
                 ->assertDontSeeIn('@foo.output', 'changed')
                 ->waitForLivewire()->click('@foo.change')
                 ->assertSeeIn('@foo.output', 'changed')
 
                 /**
-                 * Class change works as expected and doesn't wipe the textarea's value
+                 * Class change works as expected and doesn't wipe the textarea's value.
                  */
                 ->assertInputValue('@foo', 'changed')
                 ->assertSourceMissing('class="foo"')
@@ -48,7 +48,7 @@ class Test extends TestCase
                 ->assertInputValue('@foo', 'changed-again')
 
                 /**
-                 * Can set lazy value
+                 * Can set lazy value.
                  */
                 ->click('@baz') // Set focus.
                 ->type('@baz', 'lazy')
@@ -58,7 +58,7 @@ class Test extends TestCase
                 ->assertSeeIn('@baz.output', 'lazy')
 
                 /**
-                 * Can set deferred value
+                 * Can set deferred value.
                  */
                 ->click('@bob') // Set focus.
                 ->type('@bob', 'deferred')
@@ -67,8 +67,7 @@ class Test extends TestCase
                 ->pause(150) // Pause for upper-bound of most round-trip lengths.
                 ->assertDontSeeIn('@bob.output', 'deferred')
                 ->waitForLivewire()->click('@refresh')
-                ->assertSeeIn('@bob.output', 'deferred')
-                ;
+                ->assertSeeIn('@bob.output', 'deferred');
         });
     }
 }

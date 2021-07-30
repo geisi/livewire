@@ -2,11 +2,11 @@
 
 namespace Tests\Unit;
 
-use Livewire\Livewire;
-use Livewire\Component;
-use Illuminate\Support\Facades\View;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\View;
+use Livewire\Component;
 use Livewire\Exceptions\PublicPropertyTypeNotAllowedException;
+use Livewire\Livewire;
 
 class PublicPropertiesAreCastToJavaScriptUsableTypesTest extends TestCase
 {

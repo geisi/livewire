@@ -113,6 +113,6 @@ class TagCompilerTest extends TestCase
     }
 }
 
-class DynamicComponent extends Component {
-
+class DynamicComponent extends Component
+{
 }

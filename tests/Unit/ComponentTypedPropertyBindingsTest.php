@@ -13,6 +13,7 @@ class ComponentTypedPropertyBindingsTest extends TestCase
 
         if (PHP_VERSION_ID < 70400) {
             $this->markTestSkipped('Only applies to PHP 7.4 and above.');
+
             return;
         }
 

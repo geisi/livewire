@@ -68,9 +68,8 @@ class LifecycleHooksTest extends TestCase
                 ]],
                 'updatingFoo' => ['bar'],
                 'updatedFoo' => ['bar'],
-            ]
+            ],
         ])->set('foo', 'bar');
-
 
         $this->assertEquals([
             'mount' => true,
@@ -95,24 +94,24 @@ class LifecycleHooksTest extends TestCase
         $component = Livewire::test(ForLifecycleHooks::class, [
             'expected' => [
                 'updating' => [
-                    ['bar.foo' => 'baz',],
+                    ['bar.foo' => 'baz'],
                     ['bar.cocktail.soft' => 'Shirley Ginger'],
-                    ['bar.cocktail.soft' => 'Shirley Cumin']
+                    ['bar.cocktail.soft' => 'Shirley Cumin'],
                 ],
                 'updated' => [
-                    ['bar.foo' => 'baz',],
+                    ['bar.foo' => 'baz'],
                     ['bar.cocktail.soft' => 'Shirley Ginger'],
-                    ['bar.cocktail.soft' => 'Shirley Cumin']
+                    ['bar.cocktail.soft' => 'Shirley Cumin'],
                 ],
                 'updatingBar' => [
                     ['foo' => [null, 'baz']],
                     ['cocktail.soft' => [null, 'Shirley Ginger']],
-                    ['cocktail.soft' => ['Shirley Ginger', 'Shirley Cumin']]
+                    ['cocktail.soft' => ['Shirley Ginger', 'Shirley Cumin']],
                 ],
                 'updatedBar' => [
                     ['foo' => 'baz'],
                     ['cocktail.soft' => 'Shirley Ginger'],
-                    ['cocktail.soft' => 'Shirley Cumin']
+                    ['cocktail.soft' => 'Shirley Cumin'],
                 ],
             ],
         ]);
@@ -163,7 +162,7 @@ class LifecycleHooksTest extends TestCase
                 'updatedBarBaz' => [
                     ['baz' => 'bop'],
                 ],
-            ]
+            ],
         ]);
 
         $component->set('bar.baz', 'bop');
@@ -198,7 +197,7 @@ class LifecycleHooksTest extends TestCase
                 ]],
                 'updatingFoo' => ['bar'],
                 'updatedFoo' => ['bar'],
-            ]
+            ],
         ]);
 
         $component->call('$set', 'foo', 'bar');

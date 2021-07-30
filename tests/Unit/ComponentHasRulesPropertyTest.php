@@ -3,9 +3,9 @@
 namespace Tests\Unit;
 
 use Illuminate\Database\Eloquent\Model;
-use Livewire\Livewire;
 use Livewire\Component;
 use Livewire\Exceptions\MissingRulesException;
+use Livewire\Livewire;
 use Livewire\ObjectPrybar;
 use Sushi\Sushi;
 
@@ -174,9 +174,10 @@ class ComponentWithRulesPropertyAndModelUniquenessValidationWithIdExceptions ext
 {
     public $foo;
 
-    protected function rules() {
+    protected function rules()
+    {
         return [
-            'foo.email' => 'unique:foo-connection.foo_model_for_uniqueness_validations,email,'.$this->foo->id
+            'foo.email' => 'unique:foo-connection.foo_model_for_uniqueness_validations,email,'.$this->foo->id,
         ];
     }
 

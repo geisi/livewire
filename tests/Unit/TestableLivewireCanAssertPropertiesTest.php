@@ -22,8 +22,8 @@ class TestableLivewireCanAssertPropertiesTest extends TestCase
     public function can_assert_model_property_value()
     {
         Livewire::test(PropertyTestingComponent::class, [
-                'model' => ModelForPropertyTesting::first(),
-            ])
+            'model' => ModelForPropertyTesting::first(),
+        ])
             ->assertSet('model.foo.bar', 'baz');
     }
 

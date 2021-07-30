@@ -88,7 +88,7 @@ class ComponentWithExtendsLayout extends Component
     public function render()
     {
         return view('null-view')->extends('layouts.app-extends', [
-            'bar' => 'baz'
+            'bar' => 'baz',
         ]);
     }
 }
@@ -108,7 +108,7 @@ class ComponentWithCustomLayout extends Component
     public function render()
     {
         return view('null-view')->layout('layouts.app-with-bar', [
-            'bar' => 'baz'
+            'bar' => 'baz',
         ]);
     }
 }
@@ -128,7 +128,7 @@ class ComponentWithClassBasedComponentLayout extends Component
     public function render()
     {
         return view('null-view')->layout(\Tests\AppLayout::class, [
-            'bar' => 'baz'
+            'bar' => 'baz',
         ]);
     }
 }
@@ -138,7 +138,7 @@ class ComponentWithCustomParams extends Component
     public function render()
     {
         return view('null-view')->layoutData([
-            'slot' => 'foo'
+            'slot' => 'foo',
         ]);
     }
 }

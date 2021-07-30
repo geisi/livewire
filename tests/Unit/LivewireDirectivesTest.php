@@ -2,11 +2,11 @@
 
 namespace Tests\Unit;
 
-use Livewire\Livewire;
-use Livewire\Component;
-use Illuminate\Testing\TestView;
-use Illuminate\Testing\TestResponse;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Testing\TestResponse;
+use Illuminate\Testing\TestView;
+use Livewire\Component;
+use Livewire\Livewire;
 use PHPUnit\Framework\ExpectationFailedException;
 
 class LivewireDirectivesTest extends TestCase
@@ -28,7 +28,8 @@ class LivewireDirectivesTest extends TestCase
     {
         Artisan::call('make:livewire', ['name' => 'foo']);
 
-        $fakeClass = new class {
+        $fakeClass = new class
+        {
             public function getContent()
             {
                 return view('render-component', [
@@ -47,7 +48,8 @@ class LivewireDirectivesTest extends TestCase
     {
         Artisan::call('make:livewire', ['name' => 'foo']);
 
-        $fakeClass = new class {
+        $fakeClass = new class
+        {
             public function getContent()
             {
                 return view('render-component', [
@@ -68,7 +70,8 @@ class LivewireDirectivesTest extends TestCase
 
         Artisan::call('make:livewire', ['name' => 'foo']);
 
-        $fakeClass = new class {
+        $fakeClass = new class
+        {
             public function getContent()
             {
                 return view('null-view')->render();
@@ -87,7 +90,8 @@ class LivewireDirectivesTest extends TestCase
 
         Artisan::call('make:livewire', ['name' => 'foo']);
 
-        $fakeClass = new class {
+        $fakeClass = new class
+        {
             public function getContent()
             {
                 return view('null-view')->render();
@@ -102,7 +106,8 @@ class LivewireDirectivesTest extends TestCase
     /** @test */
     public function can_assert_dont_see_livewire_on_standard_blade_view()
     {
-        $fakeClass = new class {
+        $fakeClass = new class
+        {
             public function getContent()
             {
                 return view('null-view')->render();
@@ -121,7 +126,8 @@ class LivewireDirectivesTest extends TestCase
 
         Artisan::call('make:livewire', ['name' => 'foo']);
 
-        $fakeClass = new class {
+        $fakeClass = new class
+        {
             public function getContent()
             {
                 return view('render-component', [
@@ -142,7 +148,8 @@ class LivewireDirectivesTest extends TestCase
 
         Artisan::call('make:livewire', ['name' => 'foo']);
 
-        $fakeClass = new class {
+        $fakeClass = new class
+        {
             public function getContent()
             {
                 return view('render-component', [
@@ -161,7 +168,8 @@ class LivewireDirectivesTest extends TestCase
     {
         Artisan::call('make:livewire', ['name' => 'foo']);
 
-        $fakeClass = new class {
+        $fakeClass = new class
+        {
             public function getContent()
             {
                 return view('null-view')->render();
@@ -176,7 +184,7 @@ class LivewireDirectivesTest extends TestCase
     /** @test */
     public function can_assert_see_livewire_on_test_view()
     {
-        if(! class_exists(TestView::class)) {
+        if (! class_exists(TestView::class)) {
             self::markTestSkipped('Need Laravel >= 8');
         }
 
@@ -192,7 +200,7 @@ class LivewireDirectivesTest extends TestCase
     /** @test */
     public function can_assert_dont_see_livewire_on_test_view()
     {
-        if(! class_exists(TestView::class)) {
+        if (! class_exists(TestView::class)) {
             self::markTestSkipped('Need Laravel >= 8');
         }
 

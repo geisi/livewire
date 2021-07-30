@@ -11,5 +11,7 @@ class CreateBladeView extends Component
         return (new static)->createBladeViewFromString(app('view'), $contents);
     }
 
-    public function render() {}
+    public function render()
+    {
+    }
 }

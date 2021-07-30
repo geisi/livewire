@@ -2,8 +2,8 @@
 
 namespace Tests\Browser\QueryString;
 
-use Livewire\Livewire;
 use Laravel\Dusk\Browser;
+use Livewire\Livewire;
 use Tests\Browser\TestCase;
 
 class Test extends TestCase
@@ -76,8 +76,7 @@ class Test extends TestCase
                 ->waitForLivewire()->click('@bob.modify')
                 ->assertSeeIn('@bob.output', '["foo","bar","baz"]')
                 ->refresh()
-                ->assertSeeIn('@bob.output', '["foo","bar","baz"]')
-            ;
+                ->assertSeeIn('@bob.output', '["foo","bar","baz"]');
         });
     }
 
@@ -89,8 +88,7 @@ class Test extends TestCase
                 ->assertSeeIn('@output', 'foo bar')
                 ->assertInputValue('@input', 'foo bar')
                 ->assertQueryStringHas('foo', 'foo bar')
-                ->assertScript('return !! window.location.search.match(/foo=foo%20bar/)')
-            ;
+                ->assertScript('return !! window.location.search.match(/foo=foo%20bar/)');
         });
     }
 
@@ -108,8 +106,7 @@ class Test extends TestCase
 
                 // Interact with the page again to make sure everything still works.
                 ->waitForLivewire()->type('@baz-input', 'bar')
-                ->assertSeeIn('@baz-output', 'bar')
-            ;
+                ->assertSeeIn('@baz-output', 'bar');
         });
     }
 
@@ -143,8 +140,7 @@ class Test extends TestCase
                 ->assertInputValue('@input', 'foo')
                 ->forward()
                 ->back()
-                ->assertInputValue('@input', 'foo')
-            ;
+                ->assertInputValue('@input', 'foo');
         });
     }
 
@@ -162,8 +158,7 @@ class Test extends TestCase
                 ->assertSeeIn('@count', '6')
                 ->back()
                 ->back()
-                ->assertSeeIn('@count', '4')
-            ;
+                ->assertSeeIn('@count', '4');
         });
     }
 
@@ -171,8 +166,7 @@ class Test extends TestCase
     {
         $this->browse(function (Browser $browser) {
             Livewire::visit($browser, ComponentWithMethodInsteadOfProperty::class)
-                ->assertQueryStringHas('foo', 'bar')
-            ;
+                ->assertQueryStringHas('foo', 'bar');
         });
     }
 }

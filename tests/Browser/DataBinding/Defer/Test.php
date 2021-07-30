@@ -12,7 +12,7 @@ class Test extends TestCase
         $this->browse(function ($browser) {
             Livewire::visit($browser, Component::class)
                 /**
-                 * Basic wire:model.defer
+                 * Basic wire:model.defer.
                  */
                 ->type('@foo', 'foo')
                 ->click('@foo.output')
@@ -22,7 +22,7 @@ class Test extends TestCase
                 ->assertSeeIn('@foo.output', 'foo')
 
                 /**
-                 * wire:model.defer on two checkboxes
+                 * wire:model.defer on two checkboxes.
                  */
                 ->assertNotChecked('@bar.a')
                 ->assertNotChecked('@bar.b')
@@ -32,8 +32,7 @@ class Test extends TestCase
                 ->pause(150)
                 ->assertDontSeeIn('@bar.output', $expectation = '["a","b"]')
                 ->waitForLivewire()->click('@refresh')
-                ->assertSeeIn('@bar.output', $expectation)
-            ;
+                ->assertSeeIn('@bar.output', $expectation);
         });
     }
 }

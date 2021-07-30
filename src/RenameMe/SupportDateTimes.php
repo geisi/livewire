@@ -2,19 +2,24 @@
 
 namespace Livewire\RenameMe;
 
-use DateTime;
 use Carbon\Carbon;
-use Livewire\Livewire;
+use DateTime;
 use Illuminate\Support\Carbon as IlluminateCarbon;
+use Livewire\Livewire;
 
 class SupportDateTimes
 {
-    static function init() { return new static; }
+    public static function init()
+    {
+        return new static;
+    }
 
-    function __construct()
+    public function __construct()
     {
         Livewire::listen('property.dehydrate', function ($name, $value, $component, $response) {
-            if (! $value instanceof \DateTime) return;
+            if (! $value instanceof \DateTime) {
+                return;
+            }
 
             $component->{$name} = $value->format(\DateTimeInterface::ISO8601);
 

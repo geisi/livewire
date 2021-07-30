@@ -443,8 +443,8 @@ class ForValidation extends Component
                 'foo_length' => strlen($this->foo),
                 'bar_length' => strlen($this->bar),
             ],
-            [ 'foo_length' => 'same:bar_length' ],
-            [ 'same' => 'Lengths must be the same' ]
+            ['foo_length' => 'same:bar_length'],
+            ['same' => 'Lengths must be the same']
         )->validate();
     }
 
@@ -481,11 +481,11 @@ class ForValidation extends Component
     public function runValidationWithMessageProperty()
     {
         $this->messages = [
-            'required' => 'Custom Message'
+            'required' => 'Custom Message',
         ];
 
         $this->validate([
-            'bar' => 'required'
+            'bar' => 'required',
         ]);
     }
 
@@ -521,7 +521,6 @@ class ForValidation extends Component
             'items.*.baz' => ['required', 'string'],
         ]);
     }
-
 
     public function runSameValidation()
     {

@@ -2,11 +2,10 @@
 
 namespace Livewire\HydrationMiddleware;
 
-use Livewire\Livewire;
-use function Livewire\str;
-
 use Illuminate\Validation\ValidationException;
 use Livewire\Exceptions\DirectlyCallingLifecycleHooksNotAllowedException;
+use Livewire\Livewire;
+use function Livewire\str;
 
 class PerformActionCalls implements HydrationMiddleware
 {
@@ -22,7 +21,9 @@ class PerformActionCalls implements HydrationMiddleware
     {
         try {
             foreach ($request->updates as $update) {
-                if ($update['type'] !== 'callMethod') continue;
+                if ($update['type'] !== 'callMethod') {
+                    continue;
+                }
 
                 $method = $update['payload']['method'];
                 $params = $update['payload']['params'];

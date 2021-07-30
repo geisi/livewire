@@ -2,16 +2,19 @@
 
 namespace Livewire\RenameMe;
 
-use Livewire\Livewire;
 use Livewire\ImplicitlyBoundMethod;
+use Livewire\Livewire;
 
 class SupportComponentTraits
 {
-    static function init() { return new static; }
+    public static function init()
+    {
+        return new static;
+    }
 
     protected $componentIdMethodMap = [];
 
-    function __construct()
+    public function __construct()
     {
         Livewire::listen('component.hydrate', function ($component) {
             $component->initializeTraits();

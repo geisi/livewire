@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use Livewire\Livewire;
 use Livewire\Component;
+use Livewire\Livewire;
 
 class LivewireThisKeywordInBladeTest extends TestCase
 {

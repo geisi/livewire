@@ -15,7 +15,13 @@ class Request
         $this->memo = $payload['serverMemo'];
     }
 
-    public function id() { return $this->fingerprint['id']; }
+    public function id()
+    {
+        return $this->fingerprint['id'];
+    }
 
-    public function name() { return $this->fingerprint['name']; }
+    public function name()
+    {
+        return $this->fingerprint['name'];
+    }
 }

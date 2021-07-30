@@ -27,8 +27,7 @@ class PublicPropertiesAreInitializedTest extends TestCase
         $propertyValue = Livewire::test(InitializedPublicPropertyComponent::class)
             ->set('some_id', null)
             ->set('message', 'whatever')
-            ->get('some_id')
-        ;
+            ->get('some_id');
 
         $this->assertEquals(null, $propertyValue);
     }
@@ -110,7 +109,6 @@ PHP;
 
         Livewire::test(InitializedPublicTypedPropertyComponent::class)
             ->assertSee('Typed Properties FTW!');
-
     }
 }
 

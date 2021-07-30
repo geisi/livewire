@@ -15,7 +15,7 @@ class Response
     public static function fromRequest($request)
     {
         return new static($request);
-   }
+    }
 
     public function __construct($request)
     {
@@ -26,11 +26,16 @@ class Response
         $this->effects = [];
     }
 
-    public function id() { return $this->fingerprint['id']; }
+    public function id()
+    {
+        return $this->fingerprint['id'];
+    }
 
     public function embedThyselfInHtml()
     {
-        if (! $html = $this->effects['html'] ?? null) return;
+        if (! $html = $this->effects['html'] ?? null) {
+            return;
+        }
 
         $this->effects['html'] = (new AddAttributesToRootTagOfHtml)($html, [
             'initial-data' => $this->toArrayWithoutHtml(),
@@ -39,7 +44,9 @@ class Response
 
     public function embedIdInHtml()
     {
-        if (! $html = $this->effects['html'] ?? null) return;
+        if (! $html = $this->effects['html'] ?? null) {
+            return;
+        }
 
         $this->effects['html'] = (new AddAttributesToRootTagOfHtml)($html, [
             'id' => $this->fingerprint['id'],
@@ -83,7 +90,9 @@ class Response
             }
 
             // If the memo values are the same, skip adding them.
-            if ($requestMemo[$key] === $newValue) continue;
+            if ($requestMemo[$key] === $newValue) {
+                continue;
+            }
 
             $dirtyMemo[$key] = $newValue;
         }

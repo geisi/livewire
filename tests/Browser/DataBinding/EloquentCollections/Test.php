@@ -24,8 +24,7 @@ class Test extends TestCase
                 ->assertValue('@authors.0.posts.0.comments.1.author.name', 'John')
                 ->assertValue('@authors.0.posts.1.title', 'Post 2')
                 ->assertValue('@authors.1.name', 'John')
-                ->assertValue('@authors.1.email', 'john@john.com')
-                ;
+                ->assertValue('@authors.1.email', 'john@john.com');
         });
     }
 
@@ -47,8 +46,7 @@ class Test extends TestCase
                 ->assertSeeIn('@output.authors.0.posts.0.comments.1.author.name', 'Mike')
 
                 ->waitForLivewire()->type('@authors.1.name', 'Taylor')
-                ->assertSeeIn('@output.authors.1.name', 'Taylor')
-                ;
+                ->assertSeeIn('@output.authors.1.name', 'Taylor');
         });
     }
 }
@@ -61,7 +59,7 @@ class Author extends Model
 
     protected $rows = [
         ['id' => 1, 'name' => 'Bob', 'email' => 'bob@bob.com'],
-        ['id' => 2, 'name' => 'John', 'email' => 'john@john.com']
+        ['id' => 2, 'name' => 'John', 'email' => 'john@john.com'],
     ];
 
     public function posts()
@@ -83,7 +81,7 @@ class Post extends Model
 
     protected $rows = [
         ['id' => 1, 'title' => 'Post 1', 'description' => 'Post 1 Description', 'content' => 'Post 1 Content', 'author_id' => 1],
-        ['id' => 2, 'title' => 'Post 2', 'description' => 'Post 2 Description', 'content' => 'Post 2 Content', 'author_id' => 1]
+        ['id' => 2, 'title' => 'Post 2', 'description' => 'Post 2 Description', 'content' => 'Post 2 Content', 'author_id' => 1],
     ];
 
     public function author()
@@ -105,7 +103,7 @@ class Comment extends Model
 
     protected $rows = [
         ['id' => 1, 'comment' => 'Comment 1', 'post_id' => 1, 'author_id' => 1],
-        ['id' => 2, 'comment' => 'Comment 2', 'post_id' => 1, 'author_id' => 2]
+        ['id' => 2, 'comment' => 'Comment 2', 'post_id' => 1, 'author_id' => 2],
     ];
 
     public function author()

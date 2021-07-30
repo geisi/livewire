@@ -2,12 +2,12 @@
 
 namespace Livewire;
 
-use ReflectionMethod;
-use Illuminate\Routing\Route;
-use Illuminate\Support\Reflector;
-use Illuminate\Support\Collection;
 use Illuminate\Contracts\Routing\UrlRoutable;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Routing\Route;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Reflector;
+use ReflectionMethod;
 
 /**
  * This class mirrors the functionality of Laravel's Illuminate\Routing\ImplicitRouteBinding class.

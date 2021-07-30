@@ -75,7 +75,7 @@ trait RendersLivewireComponents
     {
         $uses = array_flip(class_uses_recursive($e));
 
-        return (
+        return
             // Don't wrap "abort(403)".
             $e instanceof AuthorizationException
             // Don't wrap "abort(404)".
@@ -83,7 +83,6 @@ trait RendersLivewireComponents
             // Don't wrap "abort(500)".
             || $e instanceof HttpException
             // Don't wrap most Livewire exceptions.
-            || isset($uses[BypassViewHandler::class])
-        );
+            || isset($uses[BypassViewHandler::class]);
     }
 }

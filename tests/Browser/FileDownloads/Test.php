@@ -2,9 +2,9 @@
 
 namespace Tests\Browser\FileDownloads;
 
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Tests\Browser\TestCase;
-use Illuminate\Support\Facades\Storage;
 
 class Test extends TestCase
 {

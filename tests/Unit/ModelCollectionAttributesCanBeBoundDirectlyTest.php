@@ -2,13 +2,13 @@
 
 namespace Tests\Unit;
 
-use Sushi\Sushi;
-use Livewire\Livewire;
-use Livewire\Component;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
-use Livewire\Exceptions\CorruptComponentPayloadException;
+use Illuminate\Database\Eloquent\Model;
+use Livewire\Component;
 use Livewire\Exceptions\CannotBindToModelDataWithoutValidationRuleException;
+use Livewire\Exceptions\CorruptComponentPayloadException;
+use Livewire\Livewire;
+use Sushi\Sushi;
 
 class ModelCollectionAttributesCanBeBoundDirectlyTest extends TestCase
 {
@@ -64,7 +64,6 @@ class ModelCollectionAttributesCanBeBoundDirectlyTest extends TestCase
             ->call('save')
             ->call('refreshModels')
             ->assertSet('models.3.title', 'boo');
-        ;
     }
 
     /** @test */

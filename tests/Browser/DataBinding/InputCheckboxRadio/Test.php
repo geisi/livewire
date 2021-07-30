@@ -2,8 +2,8 @@
 
 namespace Tests\Browser\DataBinding\InputCheckboxRadio;
 
-use Livewire\Livewire;
 use Laravel\Dusk\Browser;
+use Livewire\Livewire;
 use Tests\Browser\TestCase;
 
 class Test extends TestCase
@@ -19,14 +19,14 @@ class Test extends TestCase
                 ->assertSeeIn('@foo.output', 'true')
 
                 /**
-                 * Can set value
+                 * Can set value.
                  */
                 ->waitForLivewire()->uncheck('@foo')
                 ->assertNotChecked('@foo')
                 ->assertSeeIn('@foo.output', 'false')
 
                 /**
-                 * Can set value from an array
+                 * Can set value from an array.
                  */
                 ->assertNotChecked('@bar.a')->assertChecked('@bar.b')->assertNotChecked('@bar.c')
                 ->assertSeeIn('@bar.output', '["b"]')
@@ -35,10 +35,9 @@ class Test extends TestCase
                 ->assertSeeIn('@bar.output', '["b","c"]')
 
                 /**
-                 * Can set value from a number
+                 * Can set value from a number.
                  */
-                ->assertChecked('@baz')
-                ;
+                ->assertChecked('@baz');
         });
     }
 }

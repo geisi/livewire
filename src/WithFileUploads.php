@@ -2,8 +2,8 @@
 
 namespace Livewire;
 
-use Illuminate\Http\UploadedFile;
 use Facades\Livewire\GenerateSignedUploadUrl;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\ValidationException;
 use Livewire\Exceptions\S3DoesntSupportMultipleFileUploads;
 
@@ -47,7 +47,8 @@ trait WithFileUploads
         $this->syncInput($name, $file);
     }
 
-    public function uploadErrored($name, $errorsInJson, $isMultiple) {
+    public function uploadErrored($name, $errorsInJson, $isMultiple)
+    {
         $this->emit('upload:errored', $name)->self();
 
         if (is_null($errorsInJson)) {
@@ -55,10 +56,14 @@ trait WithFileUploads
             $translator = app()->make('translator');
 
             $attribute = $translator->get("validation.attributes.{$name}");
-            if ($attribute === "validation.attributes.{$name}") $attribute = $name;
+            if ($attribute === "validation.attributes.{$name}") {
+                $attribute = $name;
+            }
 
             $message = trans('validation.uploaded', ['attribute' => $attribute]);
-            if ($message === 'validation.uploaded') $message = "The {$name} failed to upload.";
+            if ($message === 'validation.uploaded') {
+                $message = "The {$name} failed to upload.";
+            }
 
             throw ValidationException::withMessages([$name => $message]);
         }
@@ -82,6 +87,7 @@ trait WithFileUploads
             $this->syncInput($name, array_values(array_filter($uploads, function ($upload) use ($tmpFilename) {
                 if ($upload->getFilename() === $tmpFilename) {
                     $upload->delete();
+
                     return false;
                 }
 
@@ -92,20 +98,26 @@ trait WithFileUploads
 
             $this->emit('upload:removed', $name, $tmpFilename)->self();
 
-            if ($uploads->getFilename() === $tmpFilename) $this->syncInput($name, null);
+            if ($uploads->getFilename() === $tmpFilename) {
+                $this->syncInput($name, null);
+            }
         }
     }
 
     protected function cleanupOldUploads()
     {
-        if (FileUploadConfiguration::isUsingS3()) return;
+        if (FileUploadConfiguration::isUsingS3()) {
+            return;
+        }
 
         $storage = FileUploadConfiguration::storage();
 
         foreach ($storage->allFiles(FileUploadConfiguration::path()) as $filePathname) {
             // On busy websites, this cleanup code can run in multiple threads causing part of the output
             // of allFiles() to have already been deleted by another thread.
-            if (! $storage->exists($filePathname)) continue;
+            if (! $storage->exists($filePathname)) {
+                continue;
+            }
 
             $yesterdaysStamp = now()->subDay()->timestamp;
             if ($yesterdaysStamp > $storage->lastModified($filePathname)) {

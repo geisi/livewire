@@ -2,8 +2,8 @@
 
 namespace Tests\Browser\DataBinding\DirtyDetection;
 
-use Livewire\Livewire;
 use Laravel\Dusk\Browser;
+use Livewire\Livewire;
 use Tests\Browser\TestCase;
 
 class Test extends TestCase
@@ -25,8 +25,7 @@ class Test extends TestCase
                 ->assertValue('@bar.input', '')
                 ->type('@bar.input', 'changed')
                 ->waitForLivewire()->click('@bar.button')
-                ->assertValue('@bar.input', '')
-            ;
+                ->assertValue('@bar.input', '');
         });
     }
 }

@@ -3,8 +3,8 @@
 namespace Tests\Unit;
 
 use Illuminate\Support\Facades\App;
-use Livewire\Livewire;
 use Livewire\Component;
+use Livewire\Livewire;
 
 class ComponentLocaleIsPersistedTest extends TestCase
 {

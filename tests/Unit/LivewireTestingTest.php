@@ -2,10 +2,10 @@
 
 namespace Tests\Unit;
 
+use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 use Livewire\Livewire;
 use Livewire\LivewireManager;
-use Illuminate\Support\Facades\Route;
 
 class LivewireTestingTest extends TestCase
 {

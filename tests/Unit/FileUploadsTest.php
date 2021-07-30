@@ -2,19 +2,19 @@
 
 namespace Tests\Unit;
 
-use LogicException;
-use RuntimeException;
-use Livewire\Livewire;
-use Livewire\Component;
-use Livewire\WithFileUploads;
-use Illuminate\Validation\Rule;
-use Illuminate\Http\UploadedFile;
-use Livewire\FileUploadConfiguration;
-use Illuminate\Support\Facades\Storage;
 use Facades\Livewire\GenerateSignedUploadUrl;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
+use Livewire\Component;
 use Livewire\Exceptions\MissingFileUploadsTraitException;
 use Livewire\Exceptions\S3DoesntSupportMultipleFileUploads;
+use Livewire\FileUploadConfiguration;
+use Livewire\Livewire;
 use function Livewire\str;
+use Livewire\WithFileUploads;
+use LogicException;
+use RuntimeException;
 
 class FileUploadsTest extends TestCase
 {
@@ -278,7 +278,7 @@ class FileUploadsTest extends TestCase
         $translator = app()->make('translator');
         $translator->addLines([
             'validation.uploaded' => 'The :attribute failed to upload.',
-            'validation.attributes.file' => 'upload'
+            'validation.attributes.file' => 'upload',
         ], 'en');
 
         $file = UploadedFile::fake()->create('upload.xls', 100);
@@ -596,7 +596,6 @@ class FileUploadsTest extends TestCase
 
         $this->assertStringStartsWith('livewire-file:', $component->get('obj.file_uploads'));
     }
-
 }
 
 class DummyMiddleware
@@ -611,7 +610,10 @@ class NonFileUploadComponent extends Component
 {
     public $photo;
 
-    public function render() { return app('view')->make('null-view'); }
+    public function render()
+    {
+        return app('view')->make('null-view');
+    }
 }
 
 class FileUploadComponent extends Component
@@ -679,7 +681,8 @@ class FileUploadComponent extends Component
         ]);
     }
 
-    public function removePhoto($key) {
+    public function removePhoto($key)
+    {
         unset($this->photos[$key]);
     }
 
@@ -688,7 +691,10 @@ class FileUploadComponent extends Component
         $this->uploadErrored($name, null, false);
     }
 
-    public function render() { return app('view')->make('null-view'); }
+    public function render()
+    {
+        return app('view')->make('null-view');
+    }
 }
 
 class FileUploadInArrayComponent extends FileUploadComponent
@@ -698,10 +704,11 @@ class FileUploadInArrayComponent extends FileUploadComponent
         'last_name' => null,
         'first_number' => 2,
         'second_number' => 99,
-        'file_uploads' => null
+        'file_uploads' => null,
     ];
 
-    public function removePhoto($key) {
+    public function removePhoto($key)
+    {
         unset($this->obj['file_uploads'][$key]);
     }
 }

@@ -7,11 +7,14 @@ use Livewire\Redirector;
 
 class SupportRedirects
 {
-    static function init() { return new static; }
+    public static function init()
+    {
+        return new static;
+    }
 
     public static $redirectorCacheStack = [];
 
-    function __construct()
+    public function __construct()
     {
         Livewire::listen('component.hydrate', function ($component, $request) {
             // Put Laravel's redirector aside and replace it with our own custom one.

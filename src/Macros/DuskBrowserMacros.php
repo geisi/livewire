@@ -2,8 +2,8 @@
 
 namespace Livewire\Macros;
 
-use function Livewire\str;
 use Facebook\WebDriver\WebDriverBy;
+use function Livewire\str;
 use PHPUnit\Framework\Assert as PHPUnit;
 
 class DuskBrowserMacros
@@ -97,6 +97,7 @@ class DuskBrowserMacros
     {
         return function ($selector) {
             $this->browser->scrollTo($selector);
+
             return $this;
         };
     }
@@ -122,7 +123,7 @@ class DuskBrowserMacros
         return function () {
             /** @var \Laravel\Dusk\Browser $this */
             return $this->waitUsing(5, 75, function () {
-                return $this->driver->executeScript("return !! window.Livewire.components.initialRenderIsFinished");
+                return $this->driver->executeScript('return !! window.Livewire.components.initialRenderIsFinished');
             });
         };
     }
@@ -152,8 +153,13 @@ class DuskBrowserMacros
             }
 
             // If no callback is passed, make ->waitForLivewire a higher-order method.
-            return new class($this, $id) {
-                public function __construct($browser, $id) { $this->browser = $browser; $this->id = $id; }
+            return new class($this, $id)
+            {
+                public function __construct($browser, $id)
+                {
+                    $this->browser = $browser;
+                    $this->id = $id;
+                }
 
                 public function __call($method, $params)
                 {
@@ -198,7 +204,7 @@ class DuskBrowserMacros
                 }
             } else {
                 foreach ($options as $option) {
-                    $optValue = (string)$option->getAttribute('value');
+                    $optValue = (string) $option->getAttribute('value');
                     if (in_array($optValue, $values)) {
                         $option->click();
                     }

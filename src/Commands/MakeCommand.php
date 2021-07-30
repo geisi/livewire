@@ -18,9 +18,10 @@ class MakeCommand extends FileManipulationCommand
             $this->argument('name')
         );
 
-        if($this->isReservedClassName($name = $this->parser->className())) {
+        if ($this->isReservedClassName($name = $this->parser->className())) {
             $this->line("<options=bold,reverse;fg=red> WHOOPS! </> 😳 \n");
             $this->line("<fg=red;options=bold>Class is reserved:</> {$name}");
+
             return;
         }
 
@@ -39,7 +40,7 @@ class MakeCommand extends FileManipulationCommand
 
         $this->refreshComponentAutodiscovery();
 
-        if($class || $view) {
+        if ($class || $view) {
             $this->line("<options=bold,reverse;fg=green> COMPONENT CREATED </> 🤙\n");
             $class && $this->line("<options=bold;fg=green>CLASS:</> {$this->parser->relativeClassPath()}");
 
@@ -194,5 +195,4 @@ class MakeCommand extends FileManipulationCommand
             'yield',
         ];
     }
-
 }

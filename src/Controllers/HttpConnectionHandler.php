@@ -2,11 +2,11 @@
 
 namespace Livewire\Controllers;
 
-use Livewire\Livewire;
-use Illuminate\Support\Str;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Str;
 use Livewire\Connection\ConnectionHandler;
+use Livewire\Livewire;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class HttpConnectionHandler extends ConnectionHandler
@@ -46,7 +46,9 @@ class HttpConnectionHandler extends ConnectionHandler
 
         $filteredMiddleware = collect($originalRouteMiddleware)->filter(function ($middleware) use ($persistentMiddleware) {
             // Some middlewares can be closures.
-            if (! is_string($middleware)) return false;
+            if (! is_string($middleware)) {
+                return false;
+            }
 
             return in_array(Str::before($middleware, ':'), $persistentMiddleware);
         })->toArray();
@@ -55,7 +57,7 @@ class HttpConnectionHandler extends ConnectionHandler
         (new Pipeline(app()))
             ->send($request)
             ->through($filteredMiddleware)
-            ->then(function() {
+            ->then(function () {
                 // noop
             });
     }

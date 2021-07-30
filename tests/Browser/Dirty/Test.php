@@ -33,7 +33,7 @@ class Test extends TestCase
                 ->assertSourceHas(' class="bar-dirty"')
 
                 /**
-                 * Set dirty using wire:target
+                 * Set dirty using wire:target.
                  */
                 ->assertSourceMissing(' class="baz-dirty"')
                 ->type('@baz.input', 'baz')
@@ -44,7 +44,7 @@ class Test extends TestCase
                 ->assertSourceMissing(' class="baz-dirty"')
 
                 /**
-                 * wire:dirty without modifiers, but with wire:target
+                 * wire:dirty without modifiers, but with wire:target.
                  */
                 ->assertMissing('@bob.target')
                 ->type('@bob.input', 'baz')
@@ -52,8 +52,7 @@ class Test extends TestCase
                 ->pause(150)
                 ->waitForLivewire()->click('@dummy')
                 ->pause(25)
-                ->assertMissing('@bob.target')
-            ;
+                ->assertMissing('@bob.target');
         });
     }
 }

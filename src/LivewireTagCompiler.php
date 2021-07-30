@@ -49,16 +49,20 @@ class LivewireTagCompiler extends ComponentTagCompiler
 
             $component = $matches[1];
 
-            if ($component === 'styles') return '@livewireStyles';
-            if ($component === 'scripts') return '@livewireScripts';
+            if ($component === 'styles') {
+                return '@livewireStyles';
+            }
+            if ($component === 'scripts') {
+                return '@livewireScripts';
+            }
             if ($component === 'dynamic-component' || $component === 'is') {
-                if(! isset($attributes['component'])) {
-                    $dynamicComponentExists = rescue(function() use ($component, $attributes) {
+                if (! isset($attributes['component'])) {
+                    $dynamicComponentExists = rescue(function () use ($component) {
                         // Need to run this in rescue otherwise running this during a test causes Livewire directory not found exception
                         return $component === 'dynamic-component' && app('livewire')->getClass('dynamic-component');
                     });
 
-                    if($dynamicComponentExists) {
+                    if ($dynamicComponentExists) {
                         return $this->componentString("'{$component}'", $attributes);
                     }
 

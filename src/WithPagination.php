@@ -31,12 +31,12 @@ trait WithPagination
 
     public function paginationView()
     {
-        return 'livewire::' . (property_exists($this, 'paginationTheme') ? $this->paginationTheme : 'tailwind');
+        return 'livewire::'.(property_exists($this, 'paginationTheme') ? $this->paginationTheme : 'tailwind');
     }
 
     public function paginationSimpleView()
     {
-        return 'livewire::simple-' . (property_exists($this, 'paginationTheme') ? $this->paginationTheme : 'tailwind');
+        return 'livewire::simple-'.(property_exists($this, 'paginationTheme') ? $this->paginationTheme : 'tailwind');
     }
 
     public function previousPage()

@@ -8,14 +8,17 @@ use Livewire\Livewire;
 
 class SupportCollections
 {
-    static function init() { return new static; }
+    public static function init()
+    {
+        return new static;
+    }
 
-    function __construct()
+    public function __construct()
     {
         Livewire::listen('property.dehydrate', function ($name, $value, $component, $response) {
-            if (! $value instanceof Collection || $value instanceof EloquentCollection) return;
-
-
+            if (! $value instanceof Collection || $value instanceof EloquentCollection) {
+                return;
+            }
         });
 
         Livewire::listen('property.hydrate', function ($name, $value, $component, $request) {

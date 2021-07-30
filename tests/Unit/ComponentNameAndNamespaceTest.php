@@ -2,10 +2,10 @@
 
 namespace Tests\Unit;
 
-use Livewire\Livewire;
-use Illuminate\Support\Facades\File;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\File;
 use Livewire\Commands\ComponentParser;
+use Livewire\Livewire;
 use Livewire\LivewireComponentsFinder;
 
 class ComponentNameAndNamespaceTest extends TestCase
@@ -38,7 +38,7 @@ EOT
 
         File::put(
             $this->livewireViewsPath('app/default-namespace.blade.php'),
-<<<EOT
+<<<'EOT'
 <div>I've been namespaced!</div>
 EOT
         );
@@ -63,7 +63,7 @@ EOT
         File::makeDirectory($this->livewireViewsPath());
 
         File::put(
-            app_path('Custom/Controllers/Http') . '/CustomNamespace.php',
+            app_path('Custom/Controllers/Http').'/CustomNamespace.php',
 <<<EOT
 <?php
 
@@ -77,12 +77,12 @@ EOT
 
         File::put(
             $this->livewireViewsPath('custom-namespace.blade.php'),
-<<<EOT
+<<<'EOT'
 <div>I've been namespaced!</div>
 EOT
         );
 
-        require(app_path('Custom/Controllers/Http') . '/CustomNamespace.php');
+        require app_path('Custom/Controllers/Http').'/CustomNamespace.php';
         $component = Livewire::test('Custom\Controllers\Http\CustomNamespace');
 
         $this->assertEquals('custom-namespace', $component->instance()->getName());
@@ -103,7 +103,7 @@ EOT
         File::makeDirectory($this->livewireViewsPath());
 
         File::put(
-            app_path() . '/AppNamespace.php',
+            app_path().'/AppNamespace.php',
 <<<EOT
 <?php
 
@@ -117,12 +117,12 @@ EOT
 
         File::put(
             $this->livewireViewsPath('app-namespace.blade.php'),
-            <<<EOT
+            <<<'EOT'
 <div>I've been namespaced!</div>
 EOT
         );
 
-        require(app_path('') . '/AppNamespace.php');
+        require app_path('').'/AppNamespace.php';
         $component = Livewire::test('App\AppNamespace');
 
         $this->assertEquals('app-namespace', $component->instance()->getName());

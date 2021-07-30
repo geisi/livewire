@@ -3,8 +3,8 @@
 namespace Livewire\Commands;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use function Livewire\str;
 
 class ComponentParser
@@ -17,7 +17,6 @@ class ComponentParser
 
     public function __construct($classNamespace, $viewPath, $rawCommand)
     {
-
         $this->baseClassNamespace = $classNamespace;
         $this->baseTestNamespace = 'Tests\Feature\Livewire';
 
@@ -52,7 +51,7 @@ class ComponentParser
             ->implode('/');
     }
 
-    public function relativeClassPath() : string
+    public function relativeClassPath(): string
     {
         return str($this->classPath())->replaceFirst(base_path().DIRECTORY_SEPARATOR, '');
     }
@@ -81,7 +80,7 @@ class ComponentParser
     {
         $stubName = $inline ? 'livewire.inline.stub' : 'livewire.stub';
 
-        if(File::exists($stubPath = base_path('stubs/'.$stubName))) {
+        if (File::exists($stubPath = base_path('stubs/'.$stubName))) {
             $template = file_get_contents($stubPath);
         } else {
             $template = file_get_contents(__DIR__.DIRECTORY_SEPARATOR.$stubName);
@@ -107,7 +106,7 @@ class ComponentParser
             ->implode(DIRECTORY_SEPARATOR);
     }
 
-    public function relativeViewPath() : string
+    public function relativeViewPath(): string
     {
         return str($this->viewPath())->replaceFirst(base_path().'/', '');
     }
@@ -120,7 +119,7 @@ class ComponentParser
     public function viewName()
     {
         return collect()
-            ->concat(explode('/',str($this->baseViewPath)->after(resource_path('views'))))
+            ->concat(explode('/', str($this->baseViewPath)->after(resource_path('views'))))
             ->filter()
             ->concat($this->directories)
             ->map([Str::class, 'kebab'])
@@ -130,7 +129,7 @@ class ComponentParser
 
     public function viewContents()
     {
-        if( ! File::exists($stubPath = base_path('stubs/livewire.view.stub'))) {
+        if (! File::exists($stubPath = base_path('stubs/livewire.view.stub'))) {
             $stubPath = __DIR__.DIRECTORY_SEPARATOR.'livewire.view.stub';
         }
 
@@ -169,7 +168,7 @@ class ComponentParser
         ->implode('/');
     }
 
-    public function relativeTestPath() : string
+    public function relativeTestPath(): string
     {
         return str($this->testPath())->replaceFirst(base_path().'/', '');
     }
@@ -178,7 +177,7 @@ class ComponentParser
     {
         $stubName = 'livewire.test.stub';
 
-        if(File::exists($stubPath = base_path('stubs/'.$stubName))) {
+        if (File::exists($stubPath = base_path('stubs/'.$stubName))) {
             $template = file_get_contents($stubPath);
         } else {
             $template = file_get_contents(__DIR__.DIRECTORY_SEPARATOR.$stubName);
@@ -186,7 +185,7 @@ class ComponentParser
 
         return preg_replace_array(
             ['/\[testnamespace\]/', '/\[classwithnamespace\]/', '/\[testclass\]/', '/\[class\]/'],
-            [$this->testNamespace(), $this->classNamespace() . '\\' . $this->className(), $this->testClassName(), $this->className()],
+            [$this->testNamespace(), $this->classNamespace().'\\'.$this->className(), $this->testClassName(), $this->className()],
             $template
         );
     }
@@ -201,6 +200,7 @@ class ComponentParser
     public static function generatePathFromNamespace($namespace)
     {
         $name = str($namespace)->finish('\\')->replaceFirst(app()->getNamespace(), '');
+
         return app('path').'/'.str_replace('\\', '/', $name);
     }
 

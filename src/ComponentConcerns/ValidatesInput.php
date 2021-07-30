@@ -2,15 +2,15 @@
 
 namespace Livewire\ComponentConcerns;
 
-use function Livewire\str;
-use Livewire\ObjectPrybar;
-use Illuminate\Support\Collection;
-use Illuminate\Support\MessageBag;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 use Illuminate\Validation\ValidationException;
 use Livewire\Exceptions\MissingRulesException;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Livewire\ObjectPrybar;
+use function Livewire\str;
 
 trait ValidatesInput
 {
@@ -73,31 +73,45 @@ trait ValidatesInput
 
     protected function getRules()
     {
-        if (method_exists($this, 'rules')) return $this->rules();
-        if (property_exists($this, 'rules')) return $this->rules;
+        if (method_exists($this, 'rules')) {
+            return $this->rules();
+        }
+        if (property_exists($this, 'rules')) {
+            return $this->rules;
+        }
 
         return [];
     }
 
     protected function getMessages()
     {
-        if (method_exists($this, 'messages')) return $this->messages();
-        if (property_exists($this, 'messages')) return $this->messages;
+        if (method_exists($this, 'messages')) {
+            return $this->messages();
+        }
+        if (property_exists($this, 'messages')) {
+            return $this->messages;
+        }
 
         return [];
     }
 
     protected function getValidationAttributes()
     {
-        if (method_exists($this, 'validationAttributes')) return $this->validationAttributes();
-        if (property_exists($this, 'validationAttributes')) return $this->validationAttributes;
+        if (method_exists($this, 'validationAttributes')) {
+            return $this->validationAttributes();
+        }
+        if (property_exists($this, 'validationAttributes')) {
+            return $this->validationAttributes;
+        }
 
         return [];
     }
 
     public function rulesForModel($name)
     {
-        if (empty($this->getRules())) return collect();
+        if (empty($this->getRules())) {
+            return collect();
+        }
 
         return collect($this->getRules())
             ->filter(function ($value, $key) use ($name) {
@@ -240,7 +254,9 @@ trait ValidatesInput
             });
 
         return collect($properties)->map(function ($value) {
-            if ($value instanceof Collection || $value instanceof EloquentCollection) return $value->toArray();
+            if ($value instanceof Collection || $value instanceof EloquentCollection) {
+                return $value->toArray();
+            }
 
             return $value;
         })->all();

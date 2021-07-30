@@ -5,7 +5,6 @@ namespace Tests\Unit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Livewire\Component;
 use Illuminate\Support\Facades\Route;
 
 class RouteMissingTest extends TestCase
@@ -39,6 +38,7 @@ PHP;
         Route::get('awesome-js/{framework}', ComponentWithModel::class)
              ->missing(function (Request $request) {
                  $this->assertEquals(request(), $request);
+
                  return redirect()->to('awesome-js/alpine');
              });
 

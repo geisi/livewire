@@ -3,8 +3,8 @@
 namespace Tests;
 
 use Illuminate\Support\Str;
-use Livewire\Livewire;
 use Livewire\Component;
+use Livewire\Livewire;
 use Tests\Unit\TestCase;
 
 class PublicPropertyHydrationHooksTest extends TestCase
